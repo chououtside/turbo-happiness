@@ -1,0 +1,80 @@
+{
+	"Appetizers": [
+		{
+			"menu-item": "Spring Roll",
+			"price": 1.95
+		},
+		{
+			"menu-item": "Vegetable Spring Roll",
+			"price": 1.95
+		},
+		{
+			"menu-item": "Fried Cheese Wonton",
+			"price": 3.95
+		},
+		{
+			"menu-item": "Fried Chicken Dumplings",
+			"price": 5.95
+		},
+		{
+			"menu-item": "Steamed Chicken Dumplings",
+			"price": 5.95
+		},
+		{
+			"menu-item": "Beef on a Stick",
+			"price": 6.95
+		},
+	],
+	"Chef's Special": [
+		{
+			"menu-item": "General Tso's Chicken",
+			"price": 8.95
+		},
+		{
+			"menu-item": "Mongolian Beef",
+			"price": 10.95
+		},
+		{
+			"menu-item": "Ginger Beef",
+			"price": 10.95
+		},
+		{
+			"menu-item": "Red Curry Chicken",
+			"price": 9.95
+		},
+		{
+			"menu-item": "House Fried Rice",
+			"price": 8.95
+		},
+		{
+			"menu-item": "House Noodles",
+			"price": 8.95
+		},
+	],
+	"Side Orders": [
+		{
+			"menu-item": "Steamed Rice",
+			"price": 2.00
+		},
+		{
+			"menu-item": "Fried Rice",
+			"price": 4.00
+		},
+		{
+			"menu-item": "Brown Rice",
+			"price": 3.00
+		},
+		{
+			"menu-item": "Steamed Noodles",
+			"price": 3.00
+		},
+		{
+			"menu-item": "Lo-Mein Noodles",
+			"price": 4.00
+		},
+		{
+			"menu-item": "French Fries",
+			"price": 3.00
+		},
+	],
+}
