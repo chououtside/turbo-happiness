@@ -1,0 +1,54 @@
+* {
+	margin: 0;
+	
+}
+
+.header {
+	background-color: rgb(246, 52, 64);
+	color: white;
+	padding: 10px;
+	max-height: 60px;
+}
+
+
+.bag {
+	float: right;
+	font-size: 2em;
+	text-decoration: none;
+	color: black;
+	line-height: 60px;
+	height: 60px;
+	margin-right: 1.5%;
+}
+
+.bag-icon {
+	max-width: 100%;
+	line-height: 60px;
+	height: 60px;
+}
+
+.bag-count {
+	margin-bottom: 10px;
+}
+
+.logo {
+	display: inline-block;
+	line-height: 60px;
+	height: 60px;
+	margin-left: 1%;
+}
+
+
+/* Styles for App */
+
+.order-section {
+	min-width: 75%;
+	background-color: red;
+	display: inline-block;
+}
+
+.group:after {
+	content: '';
+	display: table;
+	clear: both;
+}
