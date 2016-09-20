@@ -10,4 +10,11 @@ const MenuCategory = (props) => (
   </div>
 )
 
+const { arrayOf, object, string } = React.propTypes
+
+MenuCategory.propTypes = {
+  menuList: arrayOf(object),
+  category: string
+}
+
 module.exports = MenuCategory
