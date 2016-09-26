@@ -18,7 +18,8 @@
   "homepage": "https://github.com/chououtside/turbo-happiness#readme",
   "dependencies": {
     "react": "^15.3.1",
-    "react-dom": "^15.3.1"
+    "react-dom": "^15.3.1",
+    "react-intl": "^2.1.5"
   },
   "devDependencies": {
     "babel": "^6.5.2",
