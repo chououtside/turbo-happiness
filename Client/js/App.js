@@ -16,12 +16,10 @@ const App = React.createClass({
   },
 
   addToCart (item, quantity) {
-    var itemObj = {};
-    itemObj.name = item;
-    itemObj.quantity = quantity
-    console.log('hello hello')
-    console.log(itemObj)
+    let itemObj = {}
     let cartState = this.state.shoppingCart
+    itemObj.name = item
+    itemObj.quantity = quantity
     cartState.push(itemObj)
     this.setState({shoppingCart: cartState})
   },
@@ -32,9 +30,9 @@ const App = React.createClass({
         <Header />
         <div className='order-section'>
           <RestaurantBanner />
-          <Menu menuData={menuData} addToCart={this.addToCart}/>
+          <Menu menuData={menuData} addToCart={this.addToCart} />
         </div>
-        <ShoppingBag shoppingCart={this.state.shoppingCart}/>
+        <ShoppingBag shoppingCart={this.state.shoppingCart} />
       </div>
 
     )

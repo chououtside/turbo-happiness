@@ -1,10 +1,11 @@
 const React = require('react')
-const { object } = React.PropTypes
+const { object, func } = React.PropTypes
 const MenuCategory = require('./MenuCategory.js')
 
 const Menu = React.createClass({
   propTypes: {
-    menuData: object
+    menuData: object,
+    addToCart: func
   },
 
   render () {
@@ -14,7 +15,7 @@ const Menu = React.createClass({
     return (
       <div className='menu'>
         {Object.keys(menuData).map(function (category, index) {
-          return <MenuCategory menuList={menuData[category]} category={category} key={index} addToCart={addToCart}/>
+          return <MenuCategory menuList={menuData[category]} category={category} key={index} addToCart={addToCart} />
         })}
       </div>
     )

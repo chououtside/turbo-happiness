@@ -1,7 +1,6 @@
 const React = require('react')
 const { IntlProvider, FormattedNumber } = require('react-intl')
 
-
 const MenuItem = (props) => (
   <div className='menu-item' data-toggle='modal' data-target={`#${props.id}-modal`}>
     <p className='item-name'>{props.item}</p>
@@ -11,12 +10,11 @@ const MenuItem = (props) => (
   </div>
 )
 
-
-
 const { string, number } = React.PropTypes
 
 MenuItem.propTypes = {
   price: number,
-  item: string
+  item: string,
+  id: number
 }
 module.exports = MenuItem
