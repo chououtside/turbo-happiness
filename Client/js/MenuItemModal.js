@@ -53,7 +53,7 @@ const MenuItemModal = React.createClass({
               <button type='button' className='btn btn-default'data-dismiss='modal'>
                 Close
               </button>
-              <button type='button' className='btn btn-primary' data-dismiss='modal' onClick={function () { this.props.addToCart(this.props.item, this.refs[`${this.props.id}-quantity`].value) }.bind(this)}>
+              <button type='button' className='btn btn-primary' data-dismiss='modal' onClick={function () { this.props.addToCart(this.props.item, this.refs[`${this.props.id}-quantity`].value, this.props.price) }.bind(this)}>
                   Save Changes!
               </button>
             </div>

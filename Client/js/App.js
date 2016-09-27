@@ -15,11 +15,9 @@ const App = React.createClass({
     }
   },
 
-  addToCart (item, quantity) {
-    let itemObj = {}
+  addToCart (item, quantity, price) {
+    let itemObj = {item, quantity, price}
     let cartState = this.state.shoppingCart
-    itemObj.name = item
-    itemObj.quantity = quantity
     cartState.push(itemObj)
     this.setState({shoppingCart: cartState})
   },
