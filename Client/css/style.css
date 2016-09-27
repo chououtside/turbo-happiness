@@ -1,6 +1,5 @@
 * {
 	margin: 0;
-	
 }
 
 .header {
@@ -43,12 +42,75 @@
 
 .order-section {
 	min-width: 75%;
-	background-color: red;
+	height: 100%;
+	display: inline-block;
+	float: left;
+	border: 4px solid;
+	overflow: auto;
+}
+
+.menu {
+	border: 4px solid red;
+	max-width: 90%;
+	margin: auto;
+}
+
+.menu-category {
+	border: 4px solid blue;
+}
+
+.category-header {
+	background-color: #a6a6a6;
+	padding: 10px;
+	padding-left: 30px;
+	font-size: 1.5rem;
+}
+
+.menu-item {
+	border-bottom: 1px dotted black;
+	margin: 4px;
+	margin-left: 20px;
+}
+
+.item-name {
+	color: #0066ff;
+	font-weight: bold;
 	display: inline-block;
 }
+
+.add-to-cart {
+	background-size
+	height: 40px;
+}
+
+.quantity-input {
+	display: block;
+}
+/* Styles for Banner */
+
+.banner {
+	background-image: url('../img/bamboo.jpg');
+	min-height: 40%; /*Ask Joey */
+}
+
+
+/* clearfix */
 
 .group:after {
 	content: '';
 	display: table;
 	clear: both;
 }
+
+
+/* modal-styles */
+
+.modal-title h4 {
+	display: inline-block;
+}
+
+.modal-title .modal-title-price {
+	float: right;
+}
+
+

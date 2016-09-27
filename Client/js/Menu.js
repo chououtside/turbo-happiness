@@ -9,11 +9,12 @@ const Menu = React.createClass({
 
   render () {
     const menuData = this.props.menuData
+    const addToCart = this.props.addToCart
 
     return (
-      <div className='menu-container'>
+      <div className='menu'>
         {Object.keys(menuData).map(function (category, index) {
-          return <MenuCategory menuList={menuData[category]} category={category} key={index} />
+          return <MenuCategory menuList={menuData[category]} category={category} key={index} addToCart={addToCart}/>
         })}
       </div>
     )
