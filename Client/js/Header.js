@@ -1,7 +1,7 @@
 const React = require('react')
 
 const Header = () => (
-  <header className='header group'>
+  <header className='row header group'>
     <h1 className='logo'>ChineseGrub</h1>
 
     <a href='#' className='bag'>

@@ -24,14 +24,17 @@ const App = React.createClass({
 
   render () {
     return (
-      <div className='app-container'>
+      <div className='container-fluid'>
         <Header />
-        <div className='order-section'>
-          <RestaurantBanner />
-          <Menu menuData={menuData} addToCart={this.addToCart} />
+        <div className='row'>
+          <div className='col-md-9 order-section'>
+            <RestaurantBanner />
+            <Menu menuData={menuData} addToCart={this.addToCart} />
+          </div>
+          <ShoppingBag shoppingCart={this.state.shoppingCart} />
         </div>
-        <ShoppingBag shoppingCart={this.state.shoppingCart} />
-      </div>
+
+        </div>
 
     )
   }
