@@ -1,0 +1,21 @@
+{
+  "name": "react-shopping",
+  "description": "React Shopping Cart for Restaurants",
+  "main": "Client/index.html",
+  "authors": [
+    "chououtside <chouming3@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/chououtside/turbo-happiness",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.7"
+  }
+}
