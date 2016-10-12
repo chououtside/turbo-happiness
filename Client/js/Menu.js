@@ -14,9 +14,11 @@ const Menu = React.createClass({
 
     return (
       <div className='menu'>
-        {Object.keys(menuData).map(function (category, index) {
-          return <MenuCategory menuList={menuData[category]} category={category} key={index} addToCart={addToCart} />
-        })}
+        <div>
+          {Object.keys(menuData).map(function (category, index) {
+            return <MenuCategory menuList={menuData[category]} category={category} key={index} addToCart={addToCart} />
+          })}
+        </div>
       </div>
     )
   }

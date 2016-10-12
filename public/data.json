@@ -93,6 +93,26 @@
 			"item": "French Fries",
 			"price": 3.00,
 			"id": 18
+		},
+		{
+			"item": "Brown Rice",
+			"price": 3.00,
+			"id": 15
+		},
+		{
+			"item": "Steamed Noodles",
+			"price": 3.00,
+			"id": 16
+		},
+		{
+			"item": "Lo-Mein Noodles",
+			"price": 4.00,
+			"id": 17
+		},
+		{
+			"item": "French Fries",
+			"price": 3.00,
+			"id": 18
 		}
 	]
 }

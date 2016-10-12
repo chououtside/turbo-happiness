@@ -1,7 +1,7 @@
 const React = require('react')
 
 const RestaurantBanner = () => (
-  <div className='banner row'>
+  <div className='banner'>
     <div className='banner-info'>
       <h1>New Dynasty Menu</h1>
       <p>Open 11:30am to 10:00pm</p>

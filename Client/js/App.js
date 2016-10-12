@@ -11,11 +11,14 @@ const ShoppingBag = require('./ShoppingBag.js')
 const App = React.createClass({
   getInitialState () {
     return {
-      shoppingCart: []
+      shoppingCart: [],
+      totalCost: 0
+
     }
   },
 
   addToCart (item, quantity, price) {
+    this.setState({totalCost: this.state.totalCost + (quantity * price)})
     let itemObj = {item, quantity, price}
     let cartState = this.state.shoppingCart
     cartState.push(itemObj)
@@ -24,17 +27,14 @@ const App = React.createClass({
 
   render () {
     return (
-      <div className='container-fluid'>
+      <div className='app-container'>
         <Header />
-        <div className='row'>
-          <div className='col-md-9 order-section'>
-            <RestaurantBanner />
-            <Menu menuData={menuData} addToCart={this.addToCart} />
-          </div>
-          <ShoppingBag shoppingCart={this.state.shoppingCart} />
+        <div className='order-section'>
+          <RestaurantBanner />
+          <Menu menuData={menuData} addToCart={this.addToCart} />
         </div>
-
-        </div>
+        <ShoppingBag shoppingCart={this.state.shoppingCart} />
+      </div>
 
     )
   }
