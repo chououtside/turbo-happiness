@@ -22,7 +22,7 @@ const MenuItemModal = React.createClass({
                 <span className='sr-only'>Close</span>
               </button>
               <h4 className='modal-title' id='myModalLabel'>
-                  Modal title
+                  Add Item
               </h4>
             </div>
             <div className='modal-body'>
@@ -54,7 +54,7 @@ const MenuItemModal = React.createClass({
                 Close
               </button>
               <button type='button' className='btn btn-primary' data-dismiss='modal' onClick={function () { this.props.addToCart(this.props.item, this.refs[`${this.props.id}-quantity`].value, this.props.price) }.bind(this)}>
-                  Save Changes!
+                  Add to Cart
               </button>
             </div>
           </div>
