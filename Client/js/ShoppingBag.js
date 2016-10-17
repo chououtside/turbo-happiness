@@ -17,7 +17,7 @@ const ShoppingBag = React.createClass({
     } else {
       return (
 
-        <div className='shopping-section no-padding row'>
+        <div className='shopping-section'>
           <div className='checkout-section'>
             <button type='button' className='btn btn-primary btn-lg'>Proceed to Checkout</button>
           </div>
