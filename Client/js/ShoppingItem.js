@@ -23,7 +23,7 @@ const { string, number } = React.PropTypes
 ShoppingItem.propTypes = {
   price: number,
   item: string,
-  quantity: number
+  quantity: string
 }
 
 module.exports = ShoppingItem

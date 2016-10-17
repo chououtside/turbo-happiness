@@ -60,7 +60,7 @@ body {
 
 .order-section{
 	display: inline-block;
-	height: 85vh;
+	height: 84vh;
 	width: 66%;
 	overflow: auto;
 }
@@ -69,21 +69,33 @@ body {
 	margin: 0;
 	float: right;
 	display: inline-block;
-	height: 85vh;
+	height: 84vh;
 	width: 34%;
 	/*width: 100%;*/
 	z-index: -1;
 }
 
+.customer-section {
+	height: 20vh;
+}
+
 .checkout-section {
 	background-color: #a6a6a6;
-	height: 40vh;
+	height: 7vh;
 	width: 100%;
+	position: relative;
 }
 
 .cost-section {
-	height: 45vh;
+	height: 57vh;
 	overflow-y: scroll;
+}
+
+.checkout-btn {
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	margin-bottom: 1vh
 }
 
 .menu {
@@ -137,11 +149,13 @@ body {
 }
 
 .empty-bag{
-	position: absolute;
+	/*position: absolute;*/
 	display: block;
 	top: 50%;
+	/*left: 30%;*/
 	text-align: center;
-	margin: 0 auto;
+	padding-top: 50%;
+	margin: auto;
 	vertical-align: middle;
 }
 /* Styles for Banner */
