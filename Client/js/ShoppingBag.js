@@ -17,14 +17,22 @@ const ShoppingBag = React.createClass({
     } else {
       return (
 
-        <div className='shopping-section no-padding row'>
-          <div className='checkout-section'>
-            <button type='button' className='btn btn-primary btn-lg'>Proceed to Checkout</button>
+        <div className='shopping-section'>
+          <div className='customer-section'>
+            <div>Your order</div>
+            <div>
+              <p>Deliver, ASAP(55-65m)</p>
+              <p>To: 2020 P St NW, Washington, DC, 20036</p>
+              <a>Change</a>
+            </div>
           </div>
           <div className='cost-section'>
             {this.props.shoppingCart.map((item, index) => {
               return <ShoppingItem {...item} key={index} />
             })}
+          </div>
+          <div className='checkout-section'>
+            <button type='button' className='btn btn-primary btn-md checkout-btn'>Proceed to Checkout</button>
           </div>
         </div>
 
