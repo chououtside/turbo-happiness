@@ -4,7 +4,7 @@ const MenuItemModal = require('./MenuItemModal.js')
 
 const MenuCategory = (props) => (
   <div className='menu-category'>
-    <h1 className='category-header'>{props.category}</h1>
+    <div className='category-header'>{props.category}</div>
     {props.menuList.map((item, index) => {
       return <MenuItem {...item} key={index} />
     })}
