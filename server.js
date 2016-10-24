@@ -8,8 +8,10 @@ var parser = require('body-parser');
 var app = express();
 module.exports.app = app;
 
+var port = process.env.PORT || 3000;
+
 // Set what we are listening on.
-app.set('port', 3000);
+app.set('port', port);
 
 app.use(morgan('dev'));
 app.use(parser.urlencoded({extended: true}));
