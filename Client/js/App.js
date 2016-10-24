@@ -12,37 +12,45 @@ const App = React.createClass({
   getInitialState () {
     return {
       shoppingCart: [],
-      subTotal: 0
+      subTotal: 0,
+      quantityInCart: 0
 
     }
   },
 
   addToCart (item, quantity, price) {
-    this.setState({subTotal: this.state.subTotal + (quantity * price)})
     let itemObj = {item, quantity, price}
     let cartState = this.state.shoppingCart
     cartState.push(itemObj)
-    this.setState({shoppingCart: cartState})
+    this.setState({
+      subTotal: this.state.subTotal + (quantity * price),
+      quantityInCart: this.state.quantityInCart + Number(quantity),
+      shoppingCart: cartState
+    })
   },
 
   removeItem (index, quantity, price) {
-    this.setState({subTotal: this.state.subTotal - (quantity * price)})
     let cartState = this.state.shoppingCart
     cartState.splice(index, 1)
-    this.setState({shoppingCart: cartState})
+    this.setState({
+      subTotal: this.state.subTotal - (quantity * price),
+      shoppingCart: cartState,
+      quantityInCart: this.state.quantityInCart - Number(quantity)
+    })
   },
 
   emptyCart () {
     this.setState({
       subTotal: 0,
-      shoppingCart: []
+      shoppingCart: [],
+      quantityInCart: 0
     })
   },
 
   render () {
     return (
       <div className='app-container'>
-        <Header shoppingCart={this.state.shoppingCart} />
+        <Header quantityInCart={this.state.quantityInCart} />
         <div className='order-section'>
           <RestaurantBanner />
           <Menu menuData={menuData} addToCart={this.addToCart} />

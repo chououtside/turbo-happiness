@@ -1,13 +1,13 @@
 const React = require('react')
 
-const Header = (props) => (
+const Header = ({quantityInCart}) => (
   <header className='header group'>
     <h1 className='logo'>ChineseGrub</h1>
 
     <a href='#' className='bag'>
       <div className='bag-icon-section'>
         <img src='img/bag.png' className='bag-icon' />
-        <span className='bag-count'>{props.shoppingCart.length}</span>
+        <span className='bag-count'>{quantityInCart}</span>
       </div>
     </a>
   </header>

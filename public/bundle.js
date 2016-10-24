@@ -49,7 +49,7 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(34);
 	var Menu = __webpack_require__(172);
-	var menuData = __webpack_require__(199);
+	var menuData = __webpack_require__(205);
 	var Header = __webpack_require__(200);
 	var RestaurantBanner = __webpack_require__(201);
 	var ShoppingBag = __webpack_require__(202);
@@ -61,34 +61,42 @@
 	  getInitialState: function getInitialState() {
 	    return {
 	      shoppingCart: [],
-	      subTotal: 0
+	      subTotal: 0,
+	      quantityInCart: 0
 
 	    };
 	  },
 	  addToCart: function addToCart(item, quantity, price) {
-	    this.setState({ subTotal: this.state.subTotal + quantity * price });
 	    var itemObj = { item: item, quantity: quantity, price: price };
 	    var cartState = this.state.shoppingCart;
 	    cartState.push(itemObj);
-	    this.setState({ shoppingCart: cartState });
+	    this.setState({
+	      subTotal: this.state.subTotal + quantity * price,
+	      quantityInCart: this.state.quantityInCart + Number(quantity),
+	      shoppingCart: cartState
+	    });
 	  },
 	  removeItem: function removeItem(index, quantity, price) {
-	    this.setState({ subTotal: this.state.subTotal - quantity * price });
 	    var cartState = this.state.shoppingCart;
 	    cartState.splice(index, 1);
-	    this.setState({ shoppingCart: cartState });
+	    this.setState({
+	      subTotal: this.state.subTotal - quantity * price,
+	      shoppingCart: cartState,
+	      quantityInCart: this.state.quantityInCart - Number(quantity)
+	    });
 	  },
 	  emptyCart: function emptyCart() {
 	    this.setState({
 	      subTotal: 0,
-	      shoppingCart: []
+	      shoppingCart: [],
+	      quantityInCart: 0
 	    });
 	  },
 	  render: function render() {
 	    return React.createElement(
 	      'div',
 	      { className: 'app-container' },
-	      React.createElement(Header, { shoppingCart: this.state.shoppingCart }),
+	      React.createElement(Header, { quantityInCart: this.state.quantityInCart }),
 	      React.createElement(
 	        'div',
 	        { className: 'order-section' },
@@ -26498,7 +26506,312 @@
 	module.exports = MenuItemModal;
 
 /***/ },
-/* 199 */
+/* 199 */,
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var Header = function Header(_ref) {
+	  var quantityInCart = _ref.quantityInCart;
+	  return React.createElement(
+	    'header',
+	    { className: 'header group' },
+	    React.createElement(
+	      'h1',
+	      { className: 'logo' },
+	      'ChineseGrub'
+	    ),
+	    React.createElement(
+	      'a',
+	      { href: '#', className: 'bag' },
+	      React.createElement(
+	        'div',
+	        { className: 'bag-icon-section' },
+	        React.createElement('img', { src: 'img/bag.png', className: 'bag-icon' }),
+	        React.createElement(
+	          'span',
+	          { className: 'bag-count' },
+	          quantityInCart
+	        )
+	      )
+	    )
+	  );
+	};
+
+	var array = React.PropTypes.array;
+
+
+	Header.propTypes = {
+	  shoppingCart: array
+	};
+
+	module.exports = Header;
+
+/***/ },
+/* 201 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var RestaurantBanner = function RestaurantBanner() {
+	  return React.createElement(
+	    'div',
+	    { className: 'banner' },
+	    React.createElement(
+	      'div',
+	      { className: 'banner-info' },
+	      React.createElement(
+	        'h1',
+	        null,
+	        'New Dynasty Menu'
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Open 11:30am to 10:00pm'
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        '2020 P St NW Washington, DC 20036'
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        '(202) 478-4082'
+	      )
+	    )
+	  );
+	};
+
+	module.exports = RestaurantBanner;
+
+/***/ },
+/* 202 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var React = __webpack_require__(1);
+	var ShoppingItem = __webpack_require__(203);
+	var _React$PropTypes = React.PropTypes;
+	var array = _React$PropTypes.array;
+	var number = _React$PropTypes.number;
+	var func = _React$PropTypes.func;
+
+
+	var ShoppingBag = function ShoppingBag(_ref) {
+	  var shoppingCart = _ref.shoppingCart;
+	  var removeItem = _ref.removeItem;
+	  var emptyCart = _ref.emptyCart;
+	  var subTotal = _ref.subTotal;
+
+	  if (shoppingCart.length === 0) {
+	    return React.createElement(
+	      'div',
+	      { className: 'shopping-section' },
+	      React.createElement(
+	        'h1',
+	        { className: 'empty-bag' },
+	        'Your Bag is Empty!'
+	      )
+	    );
+	  } else {
+	    return React.createElement(
+	      'div',
+	      { className: 'shopping-section' },
+	      React.createElement(
+	        'div',
+	        { className: 'customer-section' },
+	        React.createElement(
+	          'div',
+	          { className: 'order-title' },
+	          'Your order'
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'customer-info' },
+	          React.createElement(
+	            'p',
+	            null,
+	            'Deliver, ASAP(55-65m)'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            'To: 2020 P St NW, Washington, DC, 20036'
+	          ),
+	          React.createElement(
+	            'a',
+	            { className: 'change-address' },
+	            'Change'
+	          )
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'cost-section' },
+	        shoppingCart.map(function (item, index) {
+	          return React.createElement(ShoppingItem, _extends({}, item, { key: index, removeItem: removeItem, index: index }));
+	        }),
+	        React.createElement(
+	          'div',
+	          { className: 'total-summary' },
+	          React.createElement(
+	            'div',
+	            { className: 'subtotal-line' },
+	            React.createElement(
+	              'span',
+	              { className: 'subtotal-header' },
+	              'Subtotal'
+	            ),
+	            React.createElement('span', { className: 'total-summary-filler' }),
+	            React.createElement(
+	              'span',
+	              { className: 'subtotal-value' },
+	              '$' + subTotal.toFixed(2)
+	            )
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'tax-line' },
+	            React.createElement(
+	              'span',
+	              { className: 'sales-tax-header' },
+	              'Sales Tax'
+	            ),
+	            React.createElement('span', { className: 'total-summary-filler' }),
+	            React.createElement(
+	              'span',
+	              { className: 'sales-tax-value' },
+	              '$' + (subTotal * (1 / 10)).toFixed(2)
+	            )
+	          ),
+	          React.createElement(
+	            'a',
+	            { className: 'empty-cart', href: 'javascript:void(0)', onClick: function onClick() {
+	                emptyCart();
+	              } },
+	            'Empty Cart'
+	          )
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'checkout-section' },
+	        React.createElement(
+	          'button',
+	          { type: 'button', className: 'btn btn-primary btn-md checkout-btn' },
+	          'Proceed to Checkout: ',
+	          '$' + (Number(subTotal.toFixed(2)) + Number((subTotal * (1 / 10)).toFixed(2))).toFixed(2)
+	        )
+	      )
+	    );
+	  }
+	};
+
+	ShoppingBag.propTypes = {
+	  shoppingCart: array,
+	  subTotal: number,
+	  emptyCart: func,
+	  removeItem: func
+	};
+	module.exports = ShoppingBag;
+
+/***/ },
+/* 203 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var _require = __webpack_require__(175);
+
+	var IntlProvider = _require.IntlProvider;
+	var FormattedNumber = _require.FormattedNumber;
+
+
+	var ShoppingItem = function ShoppingItem(_ref) {
+	  var price = _ref.price;
+	  var item = _ref.item;
+	  var quantity = _ref.quantity;
+	  var removeItem = _ref.removeItem;
+	  var index = _ref.index;
+	  return React.createElement(
+	    'div',
+	    { className: 'shopping-item' },
+	    React.createElement(
+	      'div',
+	      { className: 'remove-section' },
+	      React.createElement(
+	        'a',
+	        { href: 'javascript:void(0)', onClick: function onClick() {
+	            removeItem(index, quantity, price);
+	          } },
+	        React.createElement('span', { className: 'glyphicon glyphicon-minus remove-item-btn', 'aria-hidden': 'true' })
+	      )
+	    ),
+	    React.createElement(
+	      'div',
+	      { className: 'quantity-section' },
+	      React.createElement(
+	        'span',
+	        null,
+	        quantity
+	      )
+	    ),
+	    React.createElement(
+	      'div',
+	      { className: 'item-name-section' },
+	      React.createElement(
+	        'span',
+	        null,
+	        item
+	      )
+	    ),
+	    React.createElement(
+	      'div',
+	      { className: 'item-cost-section' },
+	      React.createElement(
+	        'span',
+	        null,
+	        React.createElement(
+	          IntlProvider,
+	          { locale: 'en' },
+	          React.createElement(FormattedNumber, { value: price * quantity, style: 'currency', currency: 'USD' })
+	        )
+	      )
+	    )
+	  );
+	};
+
+	var _React$PropTypes = React.PropTypes;
+	var string = _React$PropTypes.string;
+	var number = _React$PropTypes.number;
+	var func = _React$PropTypes.func;
+
+
+	ShoppingItem.propTypes = {
+	  price: number,
+	  item: string,
+	  quantity: string,
+	  removeItem: func,
+	  index: number
+	};
+
+	module.exports = ShoppingItem;
+
+/***/ },
+/* 204 */,
+/* 205 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -26780,308 +27093,6 @@
 			}
 		]
 	};
-
-/***/ },
-/* 200 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var Header = function Header(props) {
-	  return React.createElement(
-	    'header',
-	    { className: 'header group' },
-	    React.createElement(
-	      'h1',
-	      { className: 'logo' },
-	      'ChineseGrub'
-	    ),
-	    React.createElement(
-	      'a',
-	      { href: '#', className: 'bag' },
-	      React.createElement(
-	        'div',
-	        { className: 'bag-icon-section' },
-	        React.createElement('img', { src: 'img/bag.png', className: 'bag-icon' }),
-	        React.createElement(
-	          'span',
-	          { className: 'bag-count' },
-	          props.shoppingCart.length
-	        )
-	      )
-	    )
-	  );
-	};
-
-	var array = React.PropTypes.array;
-
-
-	Header.propTypes = {
-	  shoppingCart: array
-	};
-
-	module.exports = Header;
-
-/***/ },
-/* 201 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var RestaurantBanner = function RestaurantBanner() {
-	  return React.createElement(
-	    'div',
-	    { className: 'banner' },
-	    React.createElement(
-	      'div',
-	      { className: 'banner-info' },
-	      React.createElement(
-	        'h1',
-	        null,
-	        'New Dynasty Menu'
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'Open 11:30am to 10:00pm'
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        '2020 P St NW Washington, DC 20036'
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        '(202) 478-4082'
-	      )
-	    )
-	  );
-	};
-
-	module.exports = RestaurantBanner;
-
-/***/ },
-/* 202 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var React = __webpack_require__(1);
-	var ShoppingItem = __webpack_require__(203);
-	var _React$PropTypes = React.PropTypes;
-	var array = _React$PropTypes.array;
-	var number = _React$PropTypes.number;
-	var func = _React$PropTypes.func;
-
-
-	var ShoppingBag = function ShoppingBag(_ref) {
-	  var shoppingCart = _ref.shoppingCart;
-	  var removeItem = _ref.removeItem;
-	  var emptyCart = _ref.emptyCart;
-	  var subTotal = _ref.subTotal;
-
-	  if (shoppingCart.length === 0) {
-	    return React.createElement(
-	      'div',
-	      { className: 'shopping-section' },
-	      React.createElement(
-	        'h1',
-	        { className: 'empty-bag' },
-	        'Your Bag is Empty!'
-	      )
-	    );
-	  } else {
-	    return React.createElement(
-	      'div',
-	      { className: 'shopping-section' },
-	      React.createElement(
-	        'div',
-	        { className: 'customer-section' },
-	        React.createElement(
-	          'div',
-	          { className: 'order-title' },
-	          'Your order'
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'customer-info' },
-	          React.createElement(
-	            'p',
-	            null,
-	            'Deliver, ASAP(55-65m)'
-	          ),
-	          React.createElement(
-	            'p',
-	            null,
-	            'To: 2020 P St NW, Washington, DC, 20036'
-	          ),
-	          React.createElement(
-	            'a',
-	            { className: 'change-address' },
-	            'Change'
-	          )
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'cost-section' },
-	        shoppingCart.map(function (item, index) {
-	          return React.createElement(ShoppingItem, _extends({}, item, { key: index, removeItem: removeItem, index: index }));
-	        }),
-	        React.createElement(
-	          'div',
-	          { className: 'total-summary' },
-	          React.createElement(
-	            'div',
-	            { className: 'subtotal-line' },
-	            React.createElement(
-	              'span',
-	              { className: 'subtotal-header' },
-	              'Subtotal'
-	            ),
-	            React.createElement('span', { className: 'total-summary-filler' }),
-	            React.createElement(
-	              'span',
-	              { className: 'subtotal-value' },
-	              '$' + subTotal.toFixed(2)
-	            )
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'tax-line' },
-	            React.createElement(
-	              'span',
-	              { className: 'sales-tax-header' },
-	              'Sales Tax'
-	            ),
-	            React.createElement('span', { className: 'total-summary-filler' }),
-	            React.createElement(
-	              'span',
-	              { className: 'sales-tax-value' },
-	              '$' + (subTotal * (1 / 10)).toFixed(2)
-	            )
-	          ),
-	          React.createElement(
-	            'a',
-	            { className: 'empty-cart', href: 'javascript:void(0)', onClick: function onClick() {
-	                emptyCart();
-	              } },
-	            'Empty Cart'
-	          )
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'checkout-section' },
-	        React.createElement(
-	          'button',
-	          { type: 'button', className: 'btn btn-primary btn-md checkout-btn' },
-	          'Proceed to Checkout: ',
-	          '$' + (Number(subTotal.toFixed(2)) + Number((subTotal * (1 / 10)).toFixed(2))).toFixed(2)
-	        )
-	      )
-	    );
-	  }
-	};
-
-	ShoppingBag.propTypes = {
-	  shoppingCart: array,
-	  subTotal: number,
-	  emptyCart: func,
-	  removeItem: func
-	};
-	module.exports = ShoppingBag;
-
-/***/ },
-/* 203 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var _require = __webpack_require__(175);
-
-	var IntlProvider = _require.IntlProvider;
-	var FormattedNumber = _require.FormattedNumber;
-
-
-	var ShoppingItem = function ShoppingItem(_ref) {
-	  var price = _ref.price;
-	  var item = _ref.item;
-	  var quantity = _ref.quantity;
-	  var removeItem = _ref.removeItem;
-	  var index = _ref.index;
-	  return React.createElement(
-	    'div',
-	    { className: 'shopping-item' },
-	    React.createElement(
-	      'div',
-	      { className: 'remove-section' },
-	      React.createElement(
-	        'a',
-	        { href: 'javascript:void(0)', onClick: function onClick() {
-	            removeItem(index, quantity, price);
-	          } },
-	        React.createElement('span', { className: 'glyphicon glyphicon-minus remove-item-btn', 'aria-hidden': 'true' })
-	      )
-	    ),
-	    React.createElement(
-	      'div',
-	      { className: 'quantity-section' },
-	      React.createElement(
-	        'span',
-	        null,
-	        quantity
-	      )
-	    ),
-	    React.createElement(
-	      'div',
-	      { className: 'item-name-section' },
-	      React.createElement(
-	        'span',
-	        null,
-	        item
-	      )
-	    ),
-	    React.createElement(
-	      'div',
-	      { className: 'item-cost-section' },
-	      React.createElement(
-	        'span',
-	        null,
-	        React.createElement(
-	          IntlProvider,
-	          { locale: 'en' },
-	          React.createElement(FormattedNumber, { value: price * quantity, style: 'currency', currency: 'USD' })
-	        )
-	      )
-	    )
-	  );
-	};
-
-	var _React$PropTypes = React.PropTypes;
-	var string = _React$PropTypes.string;
-	var number = _React$PropTypes.number;
-	var func = _React$PropTypes.func;
-
-
-	ShoppingItem.propTypes = {
-	  price: number,
-	  item: string,
-	  quantity: string,
-	  removeItem: func,
-	  index: number
-	};
-
-	module.exports = ShoppingItem;
 
 /***/ }
 /******/ ]);
