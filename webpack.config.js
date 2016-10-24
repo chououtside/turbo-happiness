@@ -4,7 +4,7 @@ module.exports = {
   context: __dirname,
   entry: './Client/js/App.js',
   output: {
-    path: path.join(__dirname, '/public'),
+    path: path.join(__dirname, '/Client/js'),
     filename: 'bundle.js'
   },
   resolve: {
