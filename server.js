@@ -1,5 +1,11 @@
 var express = require('express');
 
+// Database
+var db = require('./Server/db/db');
+
+// Load schemas & relations
+var relations = require('./Server/db/relations');
+
 // Middleware
 var morgan = require('morgan');
 var parser = require('body-parser');
