@@ -1,20 +1,17 @@
-var express = require('express');
+const express = require('express');
 
 // Database
-var db = require('./Server/db/db');
-
-// Load schemas & relations
-var relations = require('./Server/db/relations');
+const db = require('./Server/config/db');
 
 // Middleware
-var morgan = require('morgan');
-var parser = require('body-parser');
+const morgan = require('morgan');
+const parser = require('body-parser');
 
 
-var app = express();
+const app = express();
 module.exports.app = app;
 
-var port = process.env.PORT || 3000;
+let port = process.env.PORT || 3000;
 
 // Set what we are listening on.
 app.set('port', port);
@@ -24,8 +21,8 @@ app.use(parser.urlencoded({extended: true}));
 app.use(parser.json());
 
 // Router
-// var router = require('./server/routes');
-// app.use(router);
+const router = require('./Server/config/routes');
+app.use(router);
 
 // Serve the client files
 app.use(express.static(__dirname + '/Client'));
