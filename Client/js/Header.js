@@ -13,10 +13,11 @@ const Header = ({quantityInCart}) => (
   </header>
 )
 
-const { array } = React.PropTypes
+const { array, number } = React.PropTypes
 
 Header.propTypes = {
-  shoppingCart: array
+  shoppingCart: array,
+  quantityInCart: number
 }
 
 module.exports = Header

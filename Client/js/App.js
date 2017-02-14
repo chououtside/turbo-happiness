@@ -1,5 +1,4 @@
 const React = require('react')
-const ReactDOM = require('react-dom')
 const Menu = require('./Menu.js')
 const menuData = require('../data/data.json')
 const Header = require('./Header.js')
