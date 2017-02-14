@@ -35,7 +35,7 @@ Restaurant.getAllRestaurants = () => Restaurant.findAll()
 
 //watch out for sql injection
 Restaurant.getMenuItems = (restaurantId) =>
-  db.query(`SELECT C.name, ME.name, ME.price, ME.precedence FROM menu_items AS ME, categories AS C WHERE category_id IN (SELECT C.id FROM categories as C WHERE restaurant_id = ${restaurantId}) AND ME.category_id = C.id ORDER BY C.precedence ASC, ME.precedence ASC;`);
+  db.query(`SELECT C.name as "category", ME.name, ME.price, ME.precedence FROM menu_items AS ME, categories AS C WHERE category_id IN (SELECT C.id FROM categories as C WHERE restaurant_id = ${restaurantId}) AND ME.category_id = C.id ORDER BY C.precedence ASC, ME.precedence ASC;`);
 
 // //Sequelize version of getMenuItems still needs refactoring to get it to work
 // Restaurant.getMenuItems = (restaurantId) =>
