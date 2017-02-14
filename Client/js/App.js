@@ -63,6 +63,4 @@ const App = React.createClass({
 
 })
 
-ReactDOM.render(<App />, document.getElementById('app'))
-
-module.exports = Menu
+export default App
