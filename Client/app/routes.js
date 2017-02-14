@@ -1,8 +1,11 @@
 import React from 'react'
-import { Route } from 'react-router'
+import { Route, IndexRoute } from 'react-router'
 
-import App from '../js/App'
+import App from '../app/app'
+import Menu from '../js/App'
 
 export default (
-  <Route path='/' component={App} />
+  <Route path='/' component={App} >
+    <IndexRoute component={Menu} />
+  </Route>
 )

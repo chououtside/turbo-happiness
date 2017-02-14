@@ -7,7 +7,7 @@ const ShoppingBag = require('./ShoppingBag.js')
 
 // Restaurant Banner can eventually take props for multiple restaurants
 
-const App = React.createClass({
+const MenuContainer = React.createClass({
   getInitialState () {
     return {
       shoppingCart: [],
@@ -48,8 +48,7 @@ const App = React.createClass({
 
   render () {
     return (
-      <div className='app-container'>
-        <Header quantityInCart={this.state.quantityInCart} />
+      <div className='menu-container'>
         <div className='order-section'>
           <RestaurantBanner />
           <Menu menuData={menuData} addToCart={this.addToCart} />
@@ -62,4 +61,4 @@ const App = React.createClass({
 
 })
 
-export default App
+export default MenuContainer
