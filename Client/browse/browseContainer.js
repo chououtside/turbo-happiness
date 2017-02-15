@@ -1,7 +1,7 @@
-import React = from 'react'
-import Menu = from './menu/menu'
-import RestaurantBanner = from './menu/restaurantBanner'
-import ShoppingBag = from './shoppingBag/shoppingBag'
+import React from 'react'
+import Menu from './menu/menu'
+import RestaurantBanner from './menu/restaurantBanner'
+import ShoppingBag from './shoppingBag/shoppingBag'
 
 // Restaurant Banner can eventually take props for multiple restaurants
 
