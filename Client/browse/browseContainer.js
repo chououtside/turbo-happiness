@@ -1,7 +1,7 @@
-const React = require('react')
-const Menu = require('./menu/menu')
-const RestaurantBanner = require('./menu/restaurantBanner')
-const ShoppingBag = require('./shoppingBag/shoppingBag')
+import React = from 'react'
+import Menu = from './menu/menu'
+import RestaurantBanner = from './menu/restaurantBanner'
+import ShoppingBag = from './shoppingBag/shoppingBag'
 
 // Restaurant Banner can eventually take props for multiple restaurants
 
