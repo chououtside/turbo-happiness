@@ -54,7 +54,7 @@ const MenuItemModal = ({ id, name, price }) => (
 )
 
 MenuItemModal.propTypes = {
-  price: number,
+  price: string,
   name: string,
   id: number
 }

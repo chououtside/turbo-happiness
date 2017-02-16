@@ -11,7 +11,7 @@ const MenuItem = ({ name, price, id }) => (
 )
 
 MenuItem.propTypes = {
-  price: number,
+  price: string,
   name: string,
   id: number
 }
