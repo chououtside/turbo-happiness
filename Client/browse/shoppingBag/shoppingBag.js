@@ -26,7 +26,7 @@ const ShoppingBag = ({ bag, emptyCart }) => {
         </div>
         <div className='cost-section'>
           {bag.items.map((item, index) => {
-            return <ShoppingItem {...item} key={index} removeItem={'removeItemfunction'} index={index} />
+            return <ShoppingItem {...item} key={index} index={index} />
           })}
           <div className='total-summary'>
             <div className='subtotal-line'>

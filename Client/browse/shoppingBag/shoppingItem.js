@@ -21,10 +21,9 @@ const ShoppingItem = ({price, item, quantity, removeItem, index}) => (
 const { string, number, func } = React.PropTypes
 
 ShoppingItem.propTypes = {
-  price: number,
+  price: string,
   item: string,
   quantity: string,
-  removeItem: func,
   index: number
 }
 
