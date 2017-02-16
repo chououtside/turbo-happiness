@@ -36,7 +36,7 @@ const ShoppingBag = ({ bag }) => {
             <div className='tax-line'>
               <span className='sales-tax-header'>Sales Tax</span>
               <span className='total-summary-filler' />
-              <span className='sales-tax-value'>{`$$`}</span>
+              <span className='sales-tax-value'>{`$${(bag.subTotal * (1 / 10)).toFixed(2)}`}</span>
             </div>
             <a className='empty-cart' href='javascript:void(0)'>Empty Cart</a>
           </div>
