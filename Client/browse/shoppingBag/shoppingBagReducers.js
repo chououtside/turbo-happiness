@@ -1,5 +1,5 @@
 import { ADD_TO_CART } from '../menu/menuActions'
-import { EMPTY_CART } from './shoppingBagActions'
+import { EMPTY_CART, REMOVE_ITEM } from './shoppingBagActions'
 
 const initialState = {
   items: [],
@@ -17,6 +17,14 @@ export default (state = initialState, action) => {
       }
     case EMPTY_CART:
       return initialState
+    case REMOVE_ITEM:
+      let items = state.items.slice()
+      let subTotal = state.subTotal - (action.payload.quantity * action.payload.price)
+      let quantityInCart = state.quantityInCart - Number(action.payload.quantity)
+
+      items.splice(action.payload.index, 1)
+
+      return { items, subTotal, quantityInCart }
     default:
       return state
   }

@@ -1,10 +1,12 @@
-const React = require('react')
-const { IntlProvider, FormattedNumber } = require('react-intl')
+import React from 'react'
+import { connect } from 'react-redux'
+import { IntlProvider, FormattedNumber } from 'react-intl'
+import { removeItem } from './shoppingBagActions'
 
 const ShoppingItem = ({price, item, quantity, removeItem, index}) => (
   <div className='shopping-item'>
     <div className='remove-section'>
-      <a href='javascript:void(0)' onClick={function () { removeItem(index, quantity, price) }}><span className='glyphicon glyphicon-minus remove-item-btn' aria-hidden='true' /></a>
+      <a href='javascript:void(0)' onClick={() => removeItem(index, quantity, price)}><span className='glyphicon glyphicon-minus remove-item-btn' aria-hidden='true' /></a>
     </div>
     <div className='quantity-section'>
       <span>{quantity}</span>
@@ -24,7 +26,14 @@ ShoppingItem.propTypes = {
   price: string,
   item: string,
   quantity: string,
-  index: number
+  index: number,
+  removeItem: func
 }
 
-module.exports = ShoppingItem
+function mapDispatchToProps (dispatch) {
+  return {
+    removeItem: (index, quantity, price) => dispatch(removeItem(index, quantity, price))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ShoppingItem)
