@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Header from '../js/Header.js'
+import Header from './header.js'
 
 const { element } = React.PropTypes
 // Restaurant Banner can eventually take props for multiple restaurants
