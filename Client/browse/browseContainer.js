@@ -1,35 +1,37 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Menu from './menu/menu'
 import RestaurantBanner from './menu/restaurantBanner'
 import ShoppingBag from './shoppingBag/shoppingBag'
-import { fetchMenu } from './menuActions'
+import { fetchMenu } from './menu/menuActions'
 
 const { func } = React.PropTypes
 
-
-const MenuContainer = React.createClass({
-  componentWillMount() {
+class BrowseContainer extends Component {
+  componentWillMount () {
     this.props.fetchMenu(1)
   }
 
-  render() {
-    <div className='browse-container'>
-      <div className='order-section'>
-        <RestaurantBanner />
-        <Menu />
+  render () {
+    return (
+      <div className='browse-container'>
+        <div className='order-section'>
+          <RestaurantBanner />
+          <Menu />
+        </div>
+        <ShoppingBag />
       </div>
-      <ShoppingBag />
-    </div>
+    )
   }
-})
+}
 
-MenuContainer.propTypes = {
+BrowseContainer.propTypes = {
   fetchMenu: func
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return {
-    loadMenu: restaurantId => dispatch(fetchMenu(restaurantId)) 
+    fetchMenu: restaurantId => dispatch(fetchMenu(restaurantId))
   }
 }
 
