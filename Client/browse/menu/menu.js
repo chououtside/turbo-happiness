@@ -1,8 +1,8 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import MenuCategory from './menuCategory'
 
-const { array, func } = React.PropTypes
+const { array } = React.PropTypes
 
 const Menu = ({ menu }) => (
   <div className='menu'>
@@ -15,9 +15,11 @@ const Menu = ({ menu }) => (
 )
 
 Menu.propTypes = {
-  menu: array,
+  menu: array
 }
 
-function mapStateToProps({ menu }) => { menu }
+function mapStateToProps ({ menu }) {
+  return { menu }
+}
 
 export default connect(mapStateToProps)(Menu)

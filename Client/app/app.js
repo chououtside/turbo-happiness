@@ -1,9 +1,10 @@
-const React = require('react')
-const Header = require('../js/Header.js')
+import React, { Component } from 'react'
+import Header from '../js/Header.js'
 
+const { element } = React.PropTypes
 // Restaurant Banner can eventually take props for multiple restaurants
 
-const App = React.createClass({
+class App extends Component {
   render () {
     return (
       <div className='app-container'>
@@ -13,7 +14,10 @@ const App = React.createClass({
 
     )
   }
+}
 
-})
+App.propTypes = {
+  children: element
+}
 
 export default App

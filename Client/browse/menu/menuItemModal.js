@@ -1,7 +1,7 @@
 import React from 'react'
 import { IntlProvider, FormattedNumber } from 'react-intl'
 
-const { string, number, func } = React.PropTypes
+const { string, number } = React.PropTypes
 
 const MenuItemModal = ({ id, name, price }) => (
   <div className='modal fade' id={`${id}-modal`} tabIndex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
@@ -44,7 +44,7 @@ const MenuItemModal = ({ id, name, price }) => (
           <button type='button' className='btn btn-default'data-dismiss='modal'>
             Close
           </button>
-          <button type='button' className='btn btn-primary' data-dismiss='modal' onClick={/*function () { this.props.addToCart(this.props.item, this.refs[`${this.props.id}-quantity`].value, this.props.price) }.bind(this)*/}>
+          <button type='button' className='btn btn-primary' data-dismiss='modal'>
               Add to Cart
           </button>
         </div>
