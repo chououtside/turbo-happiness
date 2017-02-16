@@ -1,7 +1,7 @@
-var Test = require('./schemas/test');
-var Restaurant = require('./schemas/restaurant');
-var Category = require('./schemas/category');
-var MenuItem = require('./schemas/menuItem');
+const Test = require('./schemas/test');
+const Restaurant = require('./schemas/restaurant');
+const Category = require('./schemas/category');
+const MenuItem = require('./schemas/menuItem');
 
 Restaurant.hasMany(Category, {
   foreignKey: 'restaurant_id'

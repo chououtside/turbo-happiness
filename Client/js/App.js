@@ -1,7 +1,6 @@
 const React = require('react')
 const Menu = require('./Menu.js')
 const menuData = require('../data/data.json')
-const Header = require('./Header.js')
 const RestaurantBanner = require('./RestaurantBanner.js')
 const ShoppingBag = require('./ShoppingBag.js')
 
