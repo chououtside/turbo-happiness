@@ -8,7 +8,6 @@
 //   }
 // ]
 // Should return an array of category arrays containing menu item objects
-
 import { FETCH_MENU } from './menuActions'
 
 const organizeMenuCategories = (data) => {
