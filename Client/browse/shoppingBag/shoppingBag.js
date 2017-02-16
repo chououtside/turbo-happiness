@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import ShoppingItem from './ShoppingItem.js'
+import ShoppingItem from './ShoppingItem'
+import { emptyCart } from './shoppingBagActions'
 
-const { array, number, object } = React.PropTypes
+const { array, number, object, func } = React.PropTypes
 
-const ShoppingBag = ({ bag }) => {
+const ShoppingBag = ({ bag, emptyCart }) => {
   if (bag.items.length === 0) {
     return (
       <div className='shopping-section'>
@@ -38,7 +39,7 @@ const ShoppingBag = ({ bag }) => {
               <span className='total-summary-filler' />
               <span className='sales-tax-value'>{`$${(bag.subTotal * (1 / 10)).toFixed(2)}`}</span>
             </div>
-            <a className='empty-cart' href='javascript:void(0)'>Empty Cart</a>
+            <a className='empty-cart' href='javascript:void(0)' onClick={() => emptyCart()}>Empty Cart</a>
           </div>
         </div>
         <div className='checkout-section'>
@@ -53,10 +54,17 @@ function mapStateToProps ({ bag }) {
   return { bag }
 }
 
+function mapDispatchToProps (dispatch) {
+  return {
+    emptyCart: () => dispatch(emptyCart())
+  }
+}
+
 ShoppingBag.propTypes = {
   shoppingCart: array,
   subTotal: number,
-  bag: object
+  bag: object,
+  emptyCart: func
 }
 
-export default connect(mapStateToProps)(ShoppingBag)
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingBag)

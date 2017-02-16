@@ -1,4 +1,5 @@
 import { ADD_TO_CART } from '../menu/menuActions'
+import { EMPTY_CART } from './shoppingBagActions'
 
 const initialState = {
   items: [],
@@ -14,6 +15,8 @@ export default (state = initialState, action) => {
         subTotal: state.subTotal + (action.payload.quantity * action.payload.price),
         quantityInCart: state.quantityInCart + Number(action.payload.quantity)
       }
+    case EMPTY_CART:
+      return initialState
     default:
       return state
   }
