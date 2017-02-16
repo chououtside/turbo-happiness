@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { IntlProvider, FormattedNumber } from 'react-intl'
+import { addToCart } from './menuActions'
 
-const { string, number } = React.PropTypes
-
+const { string, number, func } = React.PropTypes
 
 class MenuItemModal extends Component {
   render () {
@@ -47,8 +48,14 @@ class MenuItemModal extends Component {
               <button type='button' className='btn btn-default'data-dismiss='modal'>
                 Close
               </button>
-              <button type='button' className='btn btn-primary' data-dismiss='modal'>
-                  Add to Cart
+              <button
+                type='button'
+                className='btn btn-primary'
+                data-dismiss='modal'
+                onClick={() => this.props.addToCart(this.props.name, this.refs[`${this.props.id}-quantity`].value, this.props.price)
+                }
+              >
+                Add to Cart
               </button>
             </div>
           </div>
@@ -59,9 +66,16 @@ class MenuItemModal extends Component {
 }
 
 MenuItemModal.propTypes = {
+  addToCart: func,
   price: string,
   name: string,
   id: number
 }
 
-export default MenuItemModal
+function mapDispatchToProps (dispatch) {
+  return {
+    addToCart: (item, quantity, price) => dispatch(addToCart(item, quantity, price))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(MenuItemModal)
