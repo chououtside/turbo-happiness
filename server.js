@@ -20,12 +20,12 @@ app.use(morgan('dev'));
 app.use(parser.urlencoded({extended: true}));
 app.use(parser.json());
 
+// Serve the client files
+app.use(express.static(__dirname + '/Client'));
+
 // Router
 const router = require('./Server/config/routes');
 app.use(router);
-
-// Serve the client files
-app.use(express.static(__dirname + '/Client'));
 
 // If we are being run directly, run the server.
 if (!module.parent) {
