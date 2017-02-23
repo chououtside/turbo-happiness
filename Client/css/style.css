@@ -276,7 +276,28 @@ a, .menu-item {
 	width: 50%;
 }
 
+/* Restaurants View */
 
+.restaurants-banner {
+	background-color: #40c2de;
+	height: 15vh;
+	color: white;
+	font-weight: bold;
+	padding-bottom: 0.5%;
+}
+
+.restaurants-banner-text {
+	text-align: center;
+}
+
+.banner-large-text {
+	font-size: xx-large;
+	padding-bottom: 1%;
+}
+
+.banner-medium-text {
+	font-size: medium;
+}
 
 
 
