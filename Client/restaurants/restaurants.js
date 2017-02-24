@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import RestaurantsBanner from './restaurantsBanner'
 import { fetchRestaurants } from './restaurantsActions'
 
-const { func } = React.PropTypes
+const { func, array } = React.PropTypes
 
 class Restaurants extends Component {
   componentWillMount () {
@@ -15,6 +16,11 @@ class Restaurants extends Component {
       <div className='restaurants'>
         <RestaurantsBanner />
         <div className='search-results'><span>1 - 20</span> <span>of</span> <span>212</span> <span>near you</span></div>
+        {this.props.restaurants.map(restaurant =>
+          <div className='restaurant' key={restaurant.id}>
+            <h5><Link to={`/restaurants/${restaurant.id}/menu`}>{restaurant.name}</Link></h5>
+          </div>
+        )}
       </div>
 
     )
@@ -22,7 +28,12 @@ class Restaurants extends Component {
 }
 
 Restaurants.propTypes = {
-  fetchRestaurants: func
+  fetchRestaurants: func,
+  restaurants: array
+}
+
+function mapStateToProps ({ restaurants }) {
+  return { restaurants }
 }
 
 function mapDispatchToProps (dispatch) {
@@ -31,4 +42,4 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Restaurants)
+export default connect(mapStateToProps, mapDispatchToProps)(Restaurants)
