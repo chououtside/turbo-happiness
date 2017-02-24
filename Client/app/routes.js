@@ -8,6 +8,6 @@ import Restaurants from '../restaurants/restaurants'
 export default (
   <Route path='/' component={App} >
     <IndexRoute component={Restaurants} />
-    <Route path="menu" component={Browse} />
+    <Route path='menu' component={Browse} />
   </Route>
 )
