@@ -283,7 +283,7 @@ a, .menu-item {
 	height: 15vh;
 	color: white;
 	font-weight: bold;
-	padding-bottom: 0.5%;
+	padding-bottom: 12px;
 }
 
 .restaurants-banner-text {
@@ -292,12 +292,15 @@ a, .menu-item {
 
 .banner-large-text {
 	font-size: xx-large;
-	padding-bottom: 1%;
 }
 
 .banner-medium-text {
 	font-size: medium;
 }
 
+.search-results {
+	padding: 12px;
+	border-bottom: 2px solid rgba(0,0,0,.2)
+}
 
 
