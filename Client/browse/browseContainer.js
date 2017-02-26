@@ -4,12 +4,16 @@ import Menu from './menu/menu'
 import RestaurantBanner from './menu/restaurantBanner'
 import ShoppingBag from './shoppingBag/shoppingBag'
 import { fetchMenu } from './menu/menuActions'
+import { setCurrentRestaurant } from '../restaurants/restaurantsActions'
 
 const { func, object } = React.PropTypes
 
 class BrowseContainer extends Component {
   componentWillMount () {
-    this.props.fetchMenu(this.props.params.restaurantId)
+    let { restaurantId } = this.props.params
+    this.props.fetchMenu(restaurantId)
+    this.props.setCurrentRestaurant(restaurantId)
+
   }
 
   render () {
@@ -32,7 +36,8 @@ BrowseContainer.propTypes = {
 
 function mapDispatchToProps (dispatch) {
   return {
-    fetchMenu: restaurantId => dispatch(fetchMenu(restaurantId))
+    fetchMenu: id => dispatch(fetchMenu(id)),
+    setCurrentRestaurant: (id) => dispatch(setCurrentRestaurant(id))
   }
 }
 
