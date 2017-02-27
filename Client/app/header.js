@@ -7,7 +7,7 @@ const Header = ({bag}) => (
 
     <a href='#' className='bag'>
       <div className='bag-icon-section'>
-        <img src='img/bag.png' className='bag-icon' />
+        <img src='/img/bag.png' className='bag-icon' />
         <span className='bag-count'>{bag.quantityInCart}</span>
       </div>
     </a>

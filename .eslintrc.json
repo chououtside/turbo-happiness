@@ -5,6 +5,7 @@
 		  "ignoreRefs": true,
 		  "allowArrowFunctions": true,
 		  "allowBind": true
-		}]
+		}],
+		"camelcase": 0
 	}
 }
