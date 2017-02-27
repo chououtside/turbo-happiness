@@ -1,4 +1,4 @@
-// OrganizeMenuCategories data is a response from the api which should be in this format
+// OrganizeMenuCategories data is a response from the api which should be in this format the categories are ordered and menu items are ordered as well
 // [
 //   {
 //     "category": "Appetizers",
@@ -9,6 +9,11 @@
 // ]
 // Should return an array of category arrays containing menu item objects
 import { FETCH_MENU } from './menuActions'
+
+const initialState = {
+  items: [],
+  restaurant: null
+}
 
 const organizeMenuCategories = (data) => {
   let menu = []
@@ -29,15 +34,24 @@ const organizeMenuCategories = (data) => {
         menu.push([currentItem])
       }
     }
-
     return menu
   }
 }
 
-export default function (state = [], action) {
+const extractRestaurantInfo = (data) => {
+  let info = Object.assign({}, data)
+  delete info.item
+  delete info.itemId
+  delete info.precedence
+  delete info.price
+  delete info.category
+  return info
+}
+
+export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_MENU:
-      return organizeMenuCategories(action.payload.data)
+      return { items: organizeMenuCategories(action.payload.data), restaurant: extractRestaurantInfo(action.payload.data[0]) }
     default:
       return state
   }
