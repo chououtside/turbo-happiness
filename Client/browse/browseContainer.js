@@ -33,8 +33,7 @@ BrowseContainer.propTypes = {
 
 function mapDispatchToProps (dispatch) {
   return {
-    fetchMenu: id => dispatch(fetchMenu(id)),
-    setCurrentRestaurant: (id) => dispatch(setCurrentRestaurant(id))
+    fetchMenu: id => dispatch(fetchMenu(id))
   }
 }
 
