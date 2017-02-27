@@ -8,7 +8,7 @@ const MenuCategory = ({ items, category }) => (
   <div className='menu-category'>
     <div className='category-header'>{category}</div>
     {items.map((item, index) => {
-      return <MenuItem {...item} key={index} />
+      return <MenuItem name={item.item} id={item.id} price={item.price} key={index} />
     })}
     {items.map((item, index) => {
       return <MenuItemModal {...item} key={index} />
