@@ -303,4 +303,31 @@ a, .menu-item {
 	border-bottom: 2px solid rgba(0,0,0,.2)
 }
 
+.restaurant-card {
+/*	border: 1px solid blue;*/
+	padding: 0 20px;
+}
+
+.restaurant-card div {
+	display: inline-block;
+/*	border: 1px solid red;*/
+	padding
+}
+
+.restaurant-card div div {
+	display: block;
+}
+
+.restaurant-card img {
+	max-width: 120px;
+}
+
+.restaurant-primary-info {
+	font-size: 2.0em;
+	padding: 0 40px 0 30px;
+}
+.restaurant-primary-info a {
+	color: rgb(0, 112, 235)
+;;
+}
 
