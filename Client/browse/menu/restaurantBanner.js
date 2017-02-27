@@ -1,14 +1,50 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const RestaurantBanner = () => (
-  <div className='banner'>
-    <div className='banner-info'>
-      <h1>New Dynasty Menu</h1>
-      <p>Open 11:30am to 10:00pm</p>
-      <p>2020 P St NW Washington, DC 20036</p>
-      <p>(202) 478-4082</p>
-    </div>
-  </div>
-)
+const { object } = React.PropTypes
 
-export default RestaurantBanner
+const RestaurantBanner = ({ menu }) => {
+  if (!menu.restaurant) {
+    return (
+      <div className='banner'>
+        <div className='banner-info'>
+          <h1 />
+          <p />
+          <p />
+          <p />
+        </div>
+      </div>
+    )
+  } else {
+    const {
+      name,
+      opening_time,
+      closing_time,
+      phone_number,
+      street_address,
+      city,
+      state,
+      zipcode } = menu.restaurant
+
+    return (
+      <div className='banner'>
+        <div className='banner-info'>
+          <h1>{name} Menu</h1>
+          <p>{`Open from ${closing_time} to ${opening_time}`}</p>
+          <p>{`${street_address}, ${city}, ${state} ${zipcode}`}</p>
+          <p>{phone_number}</p>
+        </div>
+      </div>
+    )
+  }
+}
+
+RestaurantBanner.propTypes = {
+  menu: object
+}
+
+function mapStateToProps ({ menu }) {
+  return { menu }
+}
+
+export default connect(mapStateToProps)(RestaurantBanner)

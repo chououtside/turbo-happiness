@@ -2,12 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import MenuCategory from './menuCategory'
 
-const { array } = React.PropTypes
+const { object } = React.PropTypes
 
 const Menu = ({ menu }) => (
   <div className='menu'>
     <div>
-      {menu.map(function (lists, index) {
+      {menu.items.map(function (lists, index) {
         return <MenuCategory items={lists} category={lists[0].category} key={index} />
       })}
     </div>
@@ -15,7 +15,7 @@ const Menu = ({ menu }) => (
 )
 
 Menu.propTypes = {
-  menu: array
+  menu: object
 }
 
 function mapStateToProps ({ menu }) {
