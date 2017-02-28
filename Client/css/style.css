@@ -5,6 +5,7 @@
 body {
 	padding-top: 15vh;
 	box-sizing: border-box;
+	background-color: #efefef;
 }
 
 a, .menu-item {
@@ -298,20 +299,25 @@ a, .menu-item {
 	font-size: medium;
 }
 
+.search {
+	background-color: white;
+	height: 70vh;
+	width: 80vw;
+	margin: 0 auto;
+}
+
 .search-results {
 	padding: 12px;
 	border-bottom: 2px solid rgba(0,0,0,.2)
 }
 
 .restaurant-card {
-/*	border: 1px solid blue;*/
-	padding: 0 20px;
+	padding: 10px 20px;
+	border-bottom: 2px solid rgba(0,0,0,.2)
 }
 
 .restaurant-card div {
 	display: inline-block;
-/*	border: 1px solid red;*/
-	padding
 }
 
 .restaurant-card div div {
