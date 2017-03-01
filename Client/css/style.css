@@ -68,7 +68,7 @@ a, .menu-item {
 
 /* Styles for App */
 
-.order-section{
+.order-section, .checkout-page {
 	display: inline-block;
 	height: 84vh;
 	width: 66%;
@@ -332,8 +332,12 @@ a, .menu-item {
 	font-size: 2.0em;
 	padding: 0 40px 0 30px;
 }
+
 .restaurant-primary-info a {
-	color: rgb(0, 112, 235)
-;;
+	color: rgb(0, 112, 235);
+}
+
+.checkout-section {
+	display: inline-block;
 }
 
