@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 
+const { number, string } = React.PropTypes
 const RestaurantCard = ({ id, name, opening_time, closing_time, phone_number, street_address, city, state, zipcode }) => (
   <div className='restaurant-card'>
     <div className='restaurant-image'><img src='/img/restaurant-logo.png' /></div>
@@ -15,5 +16,17 @@ const RestaurantCard = ({ id, name, opening_time, closing_time, phone_number, st
     </div>
   </div>
 )
+
+RestaurantCard.propTypes = {
+  id: number,
+  name: string,
+  opening_time: string,
+  closing_time: string,
+  phone_number: string,
+  street_address: string,
+  city: string,
+  state: string,
+  zipcode: string
+}
 
 export default RestaurantCard
