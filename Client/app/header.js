@@ -1,20 +1,29 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
+const { shape, array, number, object } = React.PropTypes
 
-const Header = ({bag}) => (
-  <header className='header group'>
-    <h1 className='logo'>ChineseGrub</h1>
+class Header extends Component {
+  static contextTypes = {
+    router: object
+  }
 
-    <a href='#' className='bag'>
-      <div className='bag-icon-section'>
-        <img src='/img/bag.png' className='bag-icon' />
-        <span className='bag-count'>{bag.quantityInCart}</span>
-      </div>
-    </a>
-  </header>
-)
+  render () {
+    const { bag } = this.props
+    return (
+      <header className='header group'>
+        <h1 className='logo' onClick={() => this.context.router.push('/')}>ChineseGrub</h1>
 
-const { shape, array, number } = React.PropTypes
+        <a href='#' className='bag'>
+          <div className='bag-icon-section'>
+            <img src='/img/bag.png' className='bag-icon' />
+            <span className='bag-count'>{bag.quantityInCart}</span>
+          </div>
+        </a>
+      </header>
+    )
+  }
+}
+
 
 Header.propTypes = {
   bag: shape({

@@ -63,6 +63,7 @@ a, .menu-item {
 	line-height: 60px;
 	height: 60px;
 	margin-left: 1%;
+	cursor: pointer;
 }
 
 
