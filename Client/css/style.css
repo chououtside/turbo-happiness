@@ -338,7 +338,14 @@ a, .menu-item {
 	color: rgb(0, 112, 235);
 }
 
-.checkout-section {
-	display: inline-block;
+.checkout-page {
+	padding-left: 20px;
 }
 
+.delivery-form-header {
+	margin-bottom: 35px;
+}
+
+.delivery-contact-header{
+	margin-bottom: 20px;
+}
