@@ -7,7 +7,7 @@ class Checkout extends Component {
     return (
       <div className='checkout-container'>
         <div className='checkout-page'>
-          <div className='delivery-form-header'>
+          <div className='delivery-form-main-header'>
             <h1>Hey, we need your info first!</h1>
           </div>
           <DeliveryForm />

@@ -339,13 +339,13 @@ a, .menu-item {
 }
 
 .checkout-page {
-	padding-left: 20px;
+	padding: 0px 20px;
 }
 
-.delivery-form-header {
+.delivery-form-main-header {
 	margin-bottom: 35px;
 }
 
-.delivery-contact-header{
+.delivery-form-sub-header{
 	margin-bottom: 20px;
 }
