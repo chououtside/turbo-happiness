@@ -1,10 +1,20 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
+import { submitDeliveryInfo } from './checkoutActions'
+
+const { func } = React.PropTypes
 
 class DeliveryForm extends Component {
+  onSubmit (values) {
+    this.props.submitDeliveryInfo(values)
+  }
+
   render () {
+    const { handleSubmit } = this.props
+
     return (
-      <form>
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <h4 className='delivery-form-sub-header'>Contact</h4>
         <div className='row'>
           <div className='col-md-6 form-group'>
@@ -55,8 +65,20 @@ class DeliveryForm extends Component {
           </div>
         </div>
 
+        <button className='btn btn-primary' type='submit'>Submit</button>
       </form>
     )
+  }
+}
+
+DeliveryForm.propTypes = {
+  handleSubmit: func,
+  submitDeliveryInfo: func
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    submitDeliveryInfo: (values) => dispatch(submitDeliveryInfo(values))
   }
 }
 
@@ -64,4 +86,4 @@ const reduxDeliveryForm = reduxForm({
   form: 'delivery'
 })(DeliveryForm)
 
-export default reduxDeliveryForm
+export default connect(null, mapDispatchToProps)(reduxDeliveryForm)

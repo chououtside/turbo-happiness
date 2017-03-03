@@ -1,4 +1,4 @@
-import { SUBMIT_DELIVERY_FORM } from 'checkoutActions'
+import { SUBMIT_DELIVERY_FORM } from './checkoutActions'
 
 const initialState = {
   deliveryForm: null,
