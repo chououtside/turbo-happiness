@@ -339,7 +339,7 @@ a, .menu-item {
 }
 
 .checkout-page {
-	padding: 0px 20px;
+	padding: 0px 25px;
 }
 
 .delivery-form-main-header {
@@ -348,4 +348,19 @@ a, .menu-item {
 
 .delivery-form-sub-header{
 	margin-bottom: 20px;
+}
+
+/* Payment */
+.body-link {
+	color: #0070eb;
+	cursor: pointer;
+	font-weight: bolder;
+}
+
+.body-link .glyphicon {
+	margin-left: 5px;
+}
+
+.body	{
+	font-size: 16px;
 }
