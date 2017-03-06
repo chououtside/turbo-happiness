@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
+
 const { shape, array, number, object } = React.PropTypes
 
 class Header extends Component {
-  static contextTypes = {
-    router: object
-  }
-
   render () {
     const { bag } = this.props
     return (
       <header className='header group'>
-        <h1 className='logo' onClick={() => this.context.router.push('/')}>ChineseGrub</h1>
+        <h1 className='logo' onClick={() => this.props.redirectHome()}>ChineseGrub</h1>
 
         <a href='#' className='bag'>
           <div className='bag-icon-section'>
@@ -37,4 +35,10 @@ function mapStateToProps ({ bag }) {
   return { bag }
 }
 
-export default connect(mapStateToProps)(Header)
+function mapDispatchToProps (dispatch) {
+  return {
+    redirectHome: () => dispatch(push('/'))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

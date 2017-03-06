@@ -2,15 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ShoppingItem from './ShoppingItem'
 import { emptyCart } from './shoppingBagActions'
-import { Link } from 'react-router'
+// import { Link } from 'react-router'
+import { push } from 'react-router-redux'
 
 const { array, number, object, func } = React.PropTypes
 
 class ShoppingBag extends Component {
-  static contextTypes = {
-    router: object
-  }
-
   render () {
     const { bag, emptyCart } = this.props
 
@@ -52,7 +49,7 @@ class ShoppingBag extends Component {
           </div>
           <div className='checkout-section'>
             {/**<Link to='/' className='btn btn-primary btn-md'>Proceed to Checkout: {`$${((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2)))).toFixed(2)}`}</Link>**/}
-            <button type='button' className='btn btn-primary btn-md checkout-btn' onClick={() => this.context.router.push('/checkout')}>Proceed to Checkout: {`$${((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2)))).toFixed(2)}`}</button>
+            <button type='button' className='btn btn-primary btn-md checkout-btn' onClick={() => this.props.redirectToCheckout()}>Proceed to Checkout: {`$${((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2)))).toFixed(2)}`}</button>
           </div>
         </div>
       )
@@ -66,7 +63,8 @@ function mapStateToProps ({ bag }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    emptyCart: () => dispatch(emptyCart())
+    emptyCart: () => dispatch(emptyCart()),
+    redirectToCheckout: () => dispatch(push('/checkout'))
   }
 }
 
@@ -74,7 +72,8 @@ ShoppingBag.propTypes = {
   shoppingCart: array,
   subTotal: number,
   bag: object,
-  emptyCart: func
+  emptyCart: func,
+  redirectToCheckout: func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingBag)
