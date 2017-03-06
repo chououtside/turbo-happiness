@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
-const { shape, array, number, object } = React.PropTypes
+const { shape, array, number, func } = React.PropTypes
 
 class Header extends Component {
   render () {
@@ -22,13 +22,13 @@ class Header extends Component {
   }
 }
 
-
 Header.propTypes = {
   bag: shape({
     items: array,
     subTotal: number,
     quantityInCart: number
-  })
+  }),
+  redirectHome: func
 }
 
 function mapStateToProps ({ bag }) {
