@@ -8,7 +8,7 @@ class Checkout extends Component {
       <div className='checkout-container'>
         <div className='checkout-page'>
           <div className='delivery-form-main-header'>
-            <h1>Hey, we need your info first!</h1>
+            <h1>Where should we send your delivery to?</h1>
           </div>
           <DeliveryForm />
         </div>
