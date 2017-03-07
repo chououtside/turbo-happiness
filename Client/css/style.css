@@ -378,3 +378,11 @@ a, .menu-item {
   -moz-border-radius: 8px;
  	border-radius: 8px;
 }
+
+.custom-tip-input {
+	height: 54px;
+}
+
+.btn-success {
+	height: 45px;
+}

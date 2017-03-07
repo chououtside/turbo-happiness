@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { reduxForm, Field } from 'redux-form'
 
+const { func } = React.PropTypes
+
 class PaymentForm extends Component {
   render () {
     return (
@@ -42,9 +44,50 @@ class PaymentForm extends Component {
             <Field name='billingZipcode' component='input' type='text' className='form-control' placeholder='Billing Postal Code' />
           </div>
         </div>
+        <div className='row payment-btns'>
+          <button type='button' className='btn btn-primary col-md-6 btn-large'>Tip with credit card</button>
+          <button type='button' className='btn btn-default col-md-6 btn-large'>Tip with Cash</button>
+        </div>
+        <div className='row payment-btns'>
+          <div className='col-md-6'>
+            <button type='button' className='btn btn-primary col-md-3 btn-large'>
+              <div>20%</div>
+              <div>20%</div>
+            </button>
+            <button type='button' className='btn btn-primary col-md-3 btn-large'>
+              <div>20%</div>
+              <div>20%</div>
+            </button>
+            <button type='button' className='btn btn-primary col-md-3 btn-large'>
+              <div>20%</div>
+              <div>20%</div>
+            </button>
+            <button type='button' className='btn btn-primary col-md-3 btn-large'>
+              <div>20%</div>
+              <div>20%</div>
+            </button>
+          </div>
+          <div className='col-md-6 custom-tip-input-group'>
+            <div className='input-group'>
+              <span className='input-group-btn'>
+                <button type='button' className='btn btn-primary'>
+                  <div>Custom Tip</div>
+                  <div>20%</div>
+                </button>
+              </span>
+              <Field name='customTip' component='input' type='text' className='form-control custom-tip-input' />
+            </div>
+          </div>
+        </div>
+        <div className='row'>
+          <button type='submit' className='btn-success col-md-12 btn'>Place Your Order</button>
+        </div>
       </form>
     )
   }
+}
+PaymentForm.propTypes = {
+  redirectToCheckout: func
 }
 
 function mapDispatchToProps (dispatch) {

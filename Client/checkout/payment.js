@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import ShoppingBag from '../browse/shoppingBag/shoppingBag'
 import PaymentForm from './paymentForm'
 
-const { func } = React.PropTypes
-
 class Checkout extends Component {
   render () {
     return (
