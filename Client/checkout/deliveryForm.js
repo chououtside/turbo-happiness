@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
+import { push } from 'react-router-redux'
 import { submitDeliveryInfo } from './checkoutActions'
 
 const { func } = React.PropTypes
@@ -8,6 +9,7 @@ const { func } = React.PropTypes
 class DeliveryForm extends Component {
   onSubmit (values) {
     this.props.submitDeliveryInfo(values)
+    this.props.redirectToPayment()
   }
 
   render () {
@@ -73,12 +75,14 @@ class DeliveryForm extends Component {
 
 DeliveryForm.propTypes = {
   handleSubmit: func,
-  submitDeliveryInfo: func
+  submitDeliveryInfo: func,
+  redirectToPayment: func
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    submitDeliveryInfo: (values) => dispatch(submitDeliveryInfo(values))
+    submitDeliveryInfo: (values) => dispatch(submitDeliveryInfo(values)),
+    redirectToPayment: () => dispatch(push('/payment'))
   }
 }
 
