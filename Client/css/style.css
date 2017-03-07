@@ -339,7 +339,7 @@ a, .menu-item {
 }
 
 .checkout-page {
-	padding: 0px 25px;
+	padding: 0px 40px;
 }
 
 .delivery-form-main-header {
@@ -363,4 +363,18 @@ a, .menu-item {
 
 .body	{
 	font-size: 16px;
+}
+
+.payment-form {
+	margin-top: 10px;
+}
+
+.payment-btns {
+	margin-bottom: 10px;
+  padding: 18px 28px;
+  font-size: 22px;
+  line-height: normal;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+ 	border-radius: 8px;
 }
