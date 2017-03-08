@@ -90,4 +90,4 @@ const reduxDeliveryForm = reduxForm({
   form: 'delivery'
 })(DeliveryForm)
 
-export default connect(null, mapDispatchToProps)(reduxDeliveryForm)
+export default connect(state => ({initialValues: state.checkout.deliveryForm}), mapDispatchToProps)(reduxDeliveryForm)
