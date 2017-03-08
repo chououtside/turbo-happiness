@@ -1,0 +1,121 @@
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { reduxForm, Field } from 'redux-form'
+import { push } from 'react-router-redux'
+import { submitDeliveryInfo } from './checkoutActions'
+
+const { func } = React.PropTypes
+
+class DeliveryForm extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      firstName: !this.props.checkout.deliveryForm ? '' : this.props.checkout.deliveryForm.firstName,
+      lastName:  !this.props.checkout.deliveryForm ? '' : this.props.checkout.deliveryForm.lastName,
+      email:  !this.props.checkout.deliveryForm ? '' : this.props.checkout.deliveryForm.email,
+      phoneNumber:  !this.props.checkout.deliveryForm ? '' : this.props.checkout.deliveryForm.phoneNumber,
+      address1:  !this.props.checkout.deliveryForm ? '' : this.props.checkout.deliveryForm.address1,
+      address2:  !this.props.checkout.deliveryForm ? '' : this.props.checkout.deliveryForm.address2,
+      crossStreet:  !this.props.checkout.deliveryForm ? '' : this.props.checkout.deliveryForm.crossStreet,
+      city:  !this.props.checkout.deliveryForm ? '' : this.props.checkout.deliveryForm.city,
+      state:  !this.props.checkout.deliveryForm ? '' : this.props.checkout.deliveryForm.state,
+      zipcode:  !this.props.checkout.deliveryForm ? '' : this.props.checkout.deliveryForm.zipcode,
+      specialInstructions: !this.props.checkout.deliveryForm ? '' : this.props.checkout.deliveryForm.specialInstructions
+    }
+
+    this.onInputChange = this.onInputChange.bind(this)
+  }
+
+  onSubmit (values) {
+    this.props.submitDeliveryInfo(values)
+    this.props.redirectToPayment()
+  }
+
+  onInputChange (event) {
+    this.setState({firstName: event.target.value})
+  }
+
+  render () {
+    const { handleSubmit } = this.props
+
+    return (
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+        <h4 className='delivery-form-sub-header'>Contact</h4>
+        <div className='row'>
+          <div className='col-md-6 form-group'>
+            <Field name='firstName' component='input' type='text' className='form-control' placeholder='First Name' props={{value: this.state.firstName}} onChange={this.onInputChange} />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-md-6 form-group'>
+            <Field name='lastName' component='input' type='text' className='form-control' placeholder='Last Name' props={{value: this.state.lastName}} onChange={() => this.onInputChange(event, 'lastName')} />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-md-6 form-group'>
+            <Field name='email' component='input' type='text' className='form-control' placeholder='Email Address' props={{value: this.state.email}} onChange={() => this.onInputChange(event, 'email')} />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-md-6 form-group'>
+            <Field name='phoneNumber' component='input' type='text' className='form-control' placeholder='Mobile Phone (Required)' props={{value: this.state.phoneNumber}} onChange={() => this.onInputChange(event, 'phoneNumber')} />
+          </div>
+        </div>
+        <h4 className='delivery-form-sub-header'>Address</h4>
+        <div className='row'>
+          <div className='col-md-4 form-group'>
+            <Field name='address1' component='input' type='text' className='form-control' placeholder='Address (Required)' props={{value: this.state.address1}} onChange={() => this.onInputChange(event, 'address1')} />
+          </div>
+          <div className='col-md-4 form-group'>
+            <Field name='address2' component='input' type='text' className='form-control' placeholder='Apt., suite, floor, etc.' props={{value: this.state.address2}} onChange={() => this.onInputChange(event, 'address2')} />
+          </div>
+          <div className='col-md-4 form-group'>
+            <Field name='crossStreet' component='input' type='text' className='form-control' placeholder='Cross Street' props={{value: this.state.crossStreet}} onChange={() => this.onInputChange(event, 'crossStreet')} />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-md-4 form-group'>
+            <Field name='city' component='input' type='text' className='form-control' placeholder='City (Required)' props={{value: this.state.city}} onChange={() => this.onInputChange(event, 'city')} />
+          </div>
+          <div className='col-md-4 form-group'>
+            <Field name='state' component='input' type='text' className='form-control' placeholder='State (Required)' props={{value: this.state.state}} onChange={() => this.onInputChange(event, 'state')} />
+          </div>
+          <div className='col-md-4 form-group'>
+            <Field name='zipcode' component='input' type='text' className='form-control' placeholder='Zip Code (Required)' props={{value: this.state.zipcode}} onChange={() => this.onInputChange(event, 'zipcode')} />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-md-12 form-group'>
+            <Field name='specialInstructions' component='textarea' type='text' className='form-control' placeholder='Special Instructions' props={{value: this.state.specialInstructions}} onChange={() => this.onInputChange(event, 'specialInstructions')} />
+          </div>
+        </div>
+
+        <button className='btn btn-primary' type='submit'>Submit</button>
+      </form>
+    )
+  }
+}
+
+DeliveryForm.propTypes = {
+  handleSubmit: func,
+  submitDeliveryInfo: func,
+  redirectToPayment: func
+}
+
+function mapStateToProps ({ checkout }) {
+  return { checkout }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    submitDeliveryInfo: (values) => dispatch(submitDeliveryInfo(values)),
+    redirectToPayment: () => dispatch(push('/payment'))
+  }
+}
+
+const reduxDeliveryForm = reduxForm({
+  form: 'delivery'
+})(DeliveryForm)
+
+export default connect(mapStateToProps, mapDispatchToProps)(reduxDeliveryForm)
