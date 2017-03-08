@@ -11,7 +11,7 @@ class PaymentForm extends Component {
       <form className='payment-form'>
         <div className='row'>
           <div className='col-md-6'>
-            <div className='body'><span>Delivery on Mar 6 ASAP to</span></div>
+            <div className='body'><span>Deliver on {Date().toString().substring(4, 10)} ASAP to</span></div>
             <div className='body body-link' onClick={() => this.props.redirectToCheckout()}><span>Home</span><span className='glyphicon glyphicon-pencil' /></div>
             <div className='body'><span>Alexander</span> <span>Chou</span></div>
             <div className='body'><span>2020 P St NW</span></div>
