@@ -14,8 +14,8 @@ class PaymentForm extends Component {
         cash: false
       },
       tip: {
-        tipCredit: true,
-        tipCash: false
+        credit: true,
+        cash: false
       },
       tipAmount: {
         tip15: false,
@@ -36,6 +36,40 @@ class PaymentForm extends Component {
           creditCard: !this.state.creditOrCash.creditCard,
           cash: !this.state.creditOrCash.cash
         }
+      })
+    }
+  }
+
+  toggleTipCreditOrCash (button) {
+    if (this.state.tip[button]) {
+      return
+    } else {
+      this.setState({
+        tip: {
+          credit: !this.state.tip.credit,
+          cash: !this.state.tip.cash
+        }
+      })
+    }
+  }
+
+  toggleTipAmount (button) {
+    if (this.state.tipAmount[button]) {
+      return
+    } else {
+
+      let tipObj = {
+        tip15: false,
+        tip20: false,
+        tip25: false,
+        tip30: false,
+        tipCustom: false
+      }
+
+      tipObj[button] = true;
+
+      this.setState({
+        tipAmount: tipObj
       })
     }
   }
@@ -65,8 +99,8 @@ class PaymentForm extends Component {
             <h4>Payment Information</h4>
           </div>
           <div className='row payment-btns'>
-            <button type='button' className={this.state.creditOrCash.creditCard ? 'btn btn-primary col-md-6 btn-large' : 'btn btn-default col-md-6 btn-large unselected-btn'} onClick={() => this.toggleCreditOrCash('creditCard')}>Credit Card</button>
-            <button type='button' className={this.state.creditOrCash.cash ? 'btn btn-primary col-md-6 btn-large' : 'btn btn-default col-md-6 btn-large unselected-btn'} onClick={() => this.toggleCreditOrCash('cash')}>Cash</button>
+            <button type='button' className={this.state.creditOrCash.creditCard ? 'btn btn-primary col-md-6 btn-large' : 'btn btn-default col-md-6 btn-large'} onClick={() => this.toggleCreditOrCash('creditCard')}>Credit Card</button>
+            <button type='button' className={this.state.creditOrCash.cash ? 'btn btn-primary col-md-6 btn-large' : 'btn btn-default col-md-6 btn-large'} onClick={() => this.toggleCreditOrCash('cash')}>Cash</button>
           </div>
           <div className='row'>
             <div className='col-md-4 form-group'>
@@ -83,24 +117,24 @@ class PaymentForm extends Component {
             </div>
           </div>
           <div className='row payment-btns'>
-            <button type='button' className='btn btn-primary col-md-6 btn-large'>Tip with credit card</button>
-            <button type='button' className='btn btn-default col-md-6 btn-large'>Tip with Cash</button>
+            <button type='button' className={this.state.tip.credit ? 'btn btn-primary col-md-6 btn-large' : 'btn btn-default col-md-6 btn-large'} onClick={() => this.toggleTipCreditOrCash('credit')}>Tip with credit card</button>
+            <button type='button' className='btn btn-default col-md-6 btn-large' className={this.state.tip.cash ? 'btn btn-primary col-md-6 btn-large' : 'btn btn-default col-md-6 btn-large'} onClick={() => this.toggleTipCreditOrCash('cash')}>Tip with Cash</button>
           </div>
           <div className='row payment-btns'>
             <div className='col-md-6'>
-              <button type='button' className='btn btn-primary col-md-3 btn-large'>
+              <button type='button' className={this.state.tipAmount.tip15 ? 'btn btn-primary col-md-3 btn-large' : 'btn btn-default col-md-3 btn-large'} onClick={() => this.toggleTipAmount('tip15')}>
                 <div>{`$${((this.props.bag.subTotal + this.props.bag.subTotal * (1 / 10)) * (3 / 20)).toFixed(2)}`}</div>
                 <div>15%</div>
               </button>
-              <button type='button' className='btn btn-primary col-md-3 btn-large'>
+              <button type='button' className={this.state.tipAmount.tip20 ? 'btn btn-primary col-md-3 btn-large' : 'btn btn-default col-md-3 btn-large'} onClick={() => this.toggleTipAmount('tip20')}>
                 <div>{`$${((this.props.bag.subTotal + this.props.bag.subTotal * (1 / 10)) * (1 / 5)).toFixed(2)}`}</div>
                 <div>20%</div>
               </button>
-              <button type='button' className='btn btn-primary col-md-3 btn-large'>
+              <button type='button' className={this.state.tipAmount.tip25 ? 'btn btn-primary col-md-3 btn-large' : 'btn btn-default col-md-3 btn-large'} onClick={() => this.toggleTipAmount('tip25')}>
                 <div>{`$${((this.props.bag.subTotal + this.props.bag.subTotal * (1 / 10)) * (1 / 4)).toFixed(2)}`}</div>
                 <div>25%</div>
               </button>
-              <button type='button' className='btn btn-primary col-md-3 btn-large'>
+              <button type='button' className={this.state.tipAmount.tip30 ? 'btn btn-primary col-md-3 btn-large' : 'btn btn-default col-md-3 btn-large'} onClick={() => this.toggleTipAmount('tip30')}>
                 <div>{`$${((this.props.bag.subTotal + this.props.bag.subTotal * (1 / 10)) * (3 / 10)).toFixed(2)}`}</div>
                 <div>30%</div>
               </button>
@@ -108,7 +142,7 @@ class PaymentForm extends Component {
             <div className='col-md-6 custom-tip-input-group'>
               <div className='input-group'>
                 <span className='input-group-btn'>
-                  <button type='button' className='btn btn-primary'>
+                  <button type='button' className={this.state.tipAmount.tipCustom ? 'btn btn-primary' : 'btn btn-default'} onClick={() => this.toggleTipAmount('tipCustom')}>
                     <div>Custom Tip</div>
                     <div>20%</div>
                   </button>
