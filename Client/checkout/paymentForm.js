@@ -55,20 +55,20 @@ class PaymentForm extends Component {
           <div className='row payment-btns'>
             <div className='col-md-6'>
               <button type='button' className='btn btn-primary col-md-3 btn-large'>
-                <div>20%</div>
+                <div>{`$${((this.props.bag.subTotal + this.props.bag.subTotal * (1 / 10)) * (3 / 20)).toFixed(2)}`}</div>
+                <div>15%</div>
+              </button>
+              <button type='button' className='btn btn-primary col-md-3 btn-large'>
+                <div>{`$${((this.props.bag.subTotal + this.props.bag.subTotal * (1 / 10)) * (1 / 5)).toFixed(2)}`}</div>
                 <div>20%</div>
               </button>
               <button type='button' className='btn btn-primary col-md-3 btn-large'>
-                <div>20%</div>
-                <div>20%</div>
+                <div>{`$${((this.props.bag.subTotal + this.props.bag.subTotal * (1 / 10)) * (1 / 4)).toFixed(2)}`}</div>
+                <div>25%</div>
               </button>
               <button type='button' className='btn btn-primary col-md-3 btn-large'>
-                <div>20%</div>
-                <div>20%</div>
-              </button>
-              <button type='button' className='btn btn-primary col-md-3 btn-large'>
-                <div>20%</div>
-                <div>20%</div>
+                <div>{`$${((this.props.bag.subTotal + this.props.bag.subTotal * (1 / 10)) * (3 / 10)).toFixed(2)}`}</div>
+                <div>30%</div>
               </button>
             </div>
             <div className='col-md-6 custom-tip-input-group'>
@@ -93,11 +93,8 @@ class PaymentForm extends Component {
 }
 PaymentForm.propTypes = {
   redirectToCheckout: func,
-  checkout: object
-}
-
-function mapStateToProps ({ checkout }) {
-  return { checkout }
+  checkout: object,
+  bag: object
 }
 
 function mapDispatchToProps (dispatch) {
@@ -110,4 +107,4 @@ const reduxPaymentForm = reduxForm({
   form: 'payment'
 })(PaymentForm)
 
-export default connect(mapStateToProps, mapDispatchToProps)(reduxPaymentForm)
+export default connect(state => ({ initialValues: state.checkout.deliveryForm, checkout: state.checkout, bag: state.bag }), mapDispatchToProps)(reduxPaymentForm)
