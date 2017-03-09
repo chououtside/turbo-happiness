@@ -6,6 +6,40 @@ import { reduxForm, Field } from 'redux-form'
 const { func, object } = React.PropTypes
 
 class PaymentForm extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      creditOrCash: {
+        creditCard: true,
+        cash: false
+      },
+      tip: {
+        tipCredit: true,
+        tipCash: false
+      },
+      tipAmount: {
+        tip15: false,
+        tip20: true,
+        tip25: false,
+        tip30: false,
+        tipCustom: false
+      }
+    }
+  }
+
+  toggleCreditOrCash (button) {
+    if (this.state.creditOrCash[button]) {
+      return
+    } else {
+      this.setState({
+        creditOrCash: {
+          creditCard: !this.state.creditOrCash.creditCard,
+          cash: !this.state.creditOrCash.cash
+        }
+      })
+    }
+  }
+
   render () {
     if (this.props.checkout.deliveryForm === null) {
       return <h1>deliver form is null</h1>
@@ -31,8 +65,8 @@ class PaymentForm extends Component {
             <h4>Payment Information</h4>
           </div>
           <div className='row payment-btns'>
-            <button type='button' className='btn btn-primary col-md-6 btn-large'>Credit Card</button>
-            <button type='button' className='btn btn-default col-md-6 btn-large'>Cash</button>
+            <button type='button' className={this.state.creditOrCash.creditCard ? 'btn btn-primary col-md-6 btn-large' : 'btn btn-default col-md-6 btn-large unselected-btn'} onClick={() => this.toggleCreditOrCash('creditCard')}>Credit Card</button>
+            <button type='button' className={this.state.creditOrCash.cash ? 'btn btn-primary col-md-6 btn-large' : 'btn btn-default col-md-6 btn-large unselected-btn'} onClick={() => this.toggleCreditOrCash('cash')}>Cash</button>
           </div>
           <div className='row'>
             <div className='col-md-4 form-group'>

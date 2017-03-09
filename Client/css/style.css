@@ -386,3 +386,23 @@ a, .menu-item {
 .btn-success {
 	height: 45px;
 }
+
+.btn-default:hover,
+.btn-default:active,
+.btn-default:focus {
+	border-color: #003f85;
+	background-color: #003f85;
+	background-position: 0px -100px;
+	color: white;
+	box-shadow: none;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus {
+	background-color: #0070eb;
+	border-color: #0070eb;
+	background-image: none;
+	box-shadow: none;
+}
