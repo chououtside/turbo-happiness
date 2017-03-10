@@ -10,6 +10,7 @@ class PaymentForm extends Component {
     super(props)
     this.state = {
       customTip: '',
+      customTipPercent: 0,
       subTotal: (this.props.bag.subTotal * 1.1).toFixed(2),
       creditOrCash: {
         creditCard: true,
@@ -32,7 +33,10 @@ class PaymentForm extends Component {
   }
 
   customTipChange (event) {
-    this.setState({customTip: event.target.value})
+    this.setState({
+      customTip: event.target.value,
+      customTipPercent: isNaN((event.target.value / this.state.subTotal * 100).toFixed(0)) ? 0 : (event.target.value / this.state.subTotal * 100).toFixed(0)
+    })
   }
 
   toggleCreditOrCash (button) {
@@ -64,16 +68,18 @@ class PaymentForm extends Component {
   toggleTipAmount (button) {
     const calcTip = (percent, total) => (total * (percent / 100)).toFixed(2)
     let currentTip = calcTip(20, this.state.subTotal)
+    let currentPercent = 0
 
     if (this.state.tipAmount[button].toggle) {
       return
     } else {
       if (this.state.tipAmount.tipCustom.toggle) {
-        this.setState({customTip: ''})
+        this.setState({customTip: '', customTipPercent: 0})
       } else {
         for (const key in this.state.tipAmount) {
           if (this.state.tipAmount[key].toggle) {
             currentTip = calcTip(this.state.tipAmount[key].value, this.state.subTotal)
+            currentPercent = this.state.tipAmount[key].value
           }
         }
       }
@@ -91,7 +97,8 @@ class PaymentForm extends Component {
       if (button === 'tipCustom') {
         this.setState({
           tipAmount: tipObj,
-          customTip: currentTip
+          customTip: currentTip,
+          customTipPercent: currentPercent
         })
       } else {
         this.setState({
@@ -171,7 +178,7 @@ class PaymentForm extends Component {
                 <span className='input-group-btn'>
                   <button type='button' className={this.state.tipAmount.tipCustom.toggle ? 'btn btn-primary' : 'btn btn-default'} onClick={() => this.toggleTipAmount('tipCustom')}>
                     <div>Custom Tip</div>
-                    <div>20%</div>
+                    <div>{this.state.customTipPercent}%</div>
                   </button>
                 </span>
                 <Field name='customTip' component='input' type='text' className='form-control custom-tip-input' props={{value: this.state.customTip}} onChange={this.customTipChange} placeholder='Custom tip amount' />
