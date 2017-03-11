@@ -127,11 +127,11 @@ a, .menu-item {
 	margin-top: 4%;
 }
 
-.subtotal-header, .subtotal-value, .sales-tax-value, .sales-tax-header, .total-summary-filler {
+.subtotal-header, .subtotal-value, .sales-tax-value, .sales-tax-header, .total-summary-filler, .tip-value, .tip-header {
 	display: inline-block;
 }
 
-.subtotal-header, .sales-tax-header {
+.subtotal-header, .sales-tax-header, .tip-header {
 	width: 20%;
 	padding-left: 1%;
 	text-align: right;
@@ -140,7 +140,7 @@ a, .menu-item {
 .total-summary-filler {
 	width: 60%;
 }
-.subtotal-value, .sales-tax-value {
+.subtotal-value, .sales-tax-value, .tip-value {
 	width: 15%;
 	text-align: right;
 	padding-right: 5%

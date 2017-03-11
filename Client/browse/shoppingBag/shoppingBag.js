@@ -9,7 +9,18 @@ const { array, number, object, func } = React.PropTypes
 
 class ShoppingBag extends Component {
   render () {
+    console.log('this is props', this.props.routing)
     const { bag, emptyCart } = this.props
+
+    let tipValue = 0
+    const tipComponent = (
+      <div className='tip-line'>
+        <span className='tip-header'>Tip</span>
+        <span className='total-summary-filler' />
+        <span className='tip-value'>{`$${tipValue.toFixed(2)}`}</span>
+      </div>
+    )
+
 
     if (bag.items.length === 0) {
       return (
@@ -19,7 +30,6 @@ class ShoppingBag extends Component {
       )
     } else {
       return (
-
         <div className='shopping-section'>
           <div className='customer-section'>
             <div className='order-title'>Your order</div>
@@ -44,6 +54,7 @@ class ShoppingBag extends Component {
                 <span className='total-summary-filler' />
                 <span className='sales-tax-value'>{`$${(bag.subTotal * (1 / 10)).toFixed(2)}`}</span>
               </div>
+              {tipComponent}
               <a className='empty-cart' href='javascript:void(0)' onClick={() => emptyCart()}>Empty Cart</a>
             </div>
           </div>
@@ -57,8 +68,8 @@ class ShoppingBag extends Component {
   }
 }
 
-function mapStateToProps ({ bag }) {
-  return { bag }
+function mapStateToProps ({ bag, routing }) {
+  return { bag, routing }
 }
 
 function mapDispatchToProps (dispatch) {
