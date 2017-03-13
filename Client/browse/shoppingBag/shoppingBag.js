@@ -10,9 +10,9 @@ const { array, number, object, func } = React.PropTypes
 class ShoppingBag extends Component {
   render () {
     console.log('this is props', this.props.routing)
-    const { bag, emptyCart } = this.props
+    const { bag, emptyCart, checkout } = this.props
 
-    let tipValue = 0
+    let tipValue = checkout.tip
     const tipComponent = (
       <div className='tip-line'>
         <span className='tip-header'>Tip</span>
@@ -68,8 +68,8 @@ class ShoppingBag extends Component {
   }
 }
 
-function mapStateToProps ({ bag, routing }) {
-  return { bag, routing }
+function mapStateToProps ({ bag, routing, checkout }) {
+  return { bag, routing, checkout }
 }
 
 function mapDispatchToProps (dispatch) {
@@ -84,7 +84,8 @@ ShoppingBag.propTypes = {
   subTotal: number,
   bag: object,
   emptyCart: func,
-  redirectToCheckout: func
+  redirectToCheckout: func,
+  checkout: object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingBag)
