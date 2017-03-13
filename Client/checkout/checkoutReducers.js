@@ -2,7 +2,8 @@ import { SUBMIT_DELIVERY_FORM } from './checkoutActions'
 
 const initialState = {
   deliveryForm: {},
-  paymentForm: {}
+  paymentForm: {},
+  tip: 0
 }
 
 export default (state = initialState, action) => {
