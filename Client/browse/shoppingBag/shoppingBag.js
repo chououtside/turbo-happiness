@@ -9,18 +9,16 @@ const { array, number, object, func } = React.PropTypes
 
 class ShoppingBag extends Component {
   render () {
-    console.log('this is props', this.props.routing)
     const { bag, emptyCart, checkout } = this.props
 
     let tipValue = checkout.tip
-    const tipComponent = (
+    const tipComponent = this.props.routing.locationBeforeTransitions.pathname !== '/payment' ? <div className='tip-line' /> : (
       <div className='tip-line'>
         <span className='tip-header'>Tip</span>
         <span className='total-summary-filler' />
         <span className='tip-value'>{`$${tipValue.toFixed(2)}`}</span>
       </div>
     )
-
 
     if (bag.items.length === 0) {
       return (
@@ -85,7 +83,8 @@ ShoppingBag.propTypes = {
   bag: object,
   emptyCart: func,
   redirectToCheckout: func,
-  checkout: object
+  checkout: object,
+  routing: object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingBag)
