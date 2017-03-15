@@ -12,6 +12,7 @@ class ShoppingBag extends Component {
     const { bag, emptyCart, checkout } = this.props
 
     let tipValue = checkout.tip
+    let total = this.props.routing.locationBeforeTransitions.pathname !== '/payment' ? ((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2)))).toFixed(2) : ((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2))) + Number(this.props.checkout.tip.toFixed(2))).toFixed(2)
     const tipComponent = this.props.routing.locationBeforeTransitions.pathname !== '/payment' ? <div className='tip-line' /> : (
       <div className='tip-line'>
         <span className='tip-header'>Tip</span>
@@ -53,6 +54,11 @@ class ShoppingBag extends Component {
                 <span className='sales-tax-value'>{`$${(bag.subTotal * (1 / 10)).toFixed(2)}`}</span>
               </div>
               {tipComponent}
+              <div className='tax-line'>
+                <span className='sales-tax-header'>Total</span>
+                <span className='total-summary-filler' />
+                <span className='sales-tax-value'>{`$${total}`}</span>
+              </div>
               <a className='empty-cart' href='javascript:void(0)' onClick={() => emptyCart()}>Empty Cart</a>
             </div>
           </div>
