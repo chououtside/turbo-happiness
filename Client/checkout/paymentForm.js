@@ -2,16 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { reduxForm, Field } from 'redux-form'
+import { adjustTip } from './checkoutActions'
 
 const { func, object } = React.PropTypes
 
 class PaymentForm extends Component {
   constructor (props) {
     super(props)
+    // console.log('this is props', this.props.adjustTip)
+    // console.log('this is prop object', this.props)
     this.state = {
       customTip: '',
       customTipPercent: 0,
-      subTotal: (this.props.bag.subTotal * 1.1).toFixed(2),
+      subTotal: this.props.bag.subTotal.toFixed(2),
       creditOrCash: {
         creditCard: true,
         cash: false
@@ -32,10 +35,16 @@ class PaymentForm extends Component {
     this.customTipChange = this.customTipChange.bind(this)
   }
 
+  componentWillMount () {
+    if (this.props.checkout.deliveryForm) {
+      this.props.adjustTip(this.props.bag.subTotal, 10, 20)
+    }
+  }
+
   customTipChange (event) {
     this.setState({
       customTip: event.target.value,
-      customTipPercent: isNaN((event.target.value / this.state.subTotal * 100).toFixed(0)) ? 0 : (event.target.value / this.state.subTotal * 100).toFixed(0)
+      customTipPercent: isNaN((event.target.value / (this.state.subTotal * 1.1) * 100).toFixed(0)) ? 0 : (event.target.value / (this.state.subTotal * 1.1) * 100).toFixed(0)
     })
   }
 
@@ -66,19 +75,23 @@ class PaymentForm extends Component {
   }
 
   toggleTipAmount (button) {
-    const calcTip = (percent, total) => (total * (percent / 100)).toFixed(2)
+    const calcTip = (total, tax, tip) => (total * (1 + tax / 100) * (tip / 100)).toFixed(2)
     let currentTip = calcTip(20, this.state.subTotal)
     let currentPercent = 0
 
+    // if selected button is the same button, do not do anything and return out of function
     if (this.state.tipAmount[button].toggle) {
       return
     } else {
+      // this whole block is to hold state for tipAmount for the customTip Input
+      // if current selected button is custom tip, reset values
       if (this.state.tipAmount.tipCustom.toggle) {
         this.setState({customTip: '', customTipPercent: 0})
       } else {
+      // iterate through all keys to find CURRENT selected button to store the value
         for (const key in this.state.tipAmount) {
           if (this.state.tipAmount[key].toggle) {
-            currentTip = calcTip(this.state.tipAmount[key].value, this.state.subTotal)
+            currentTip = calcTip(this.state.subTotal, 10, this.state.tipAmount[key].value)
             currentPercent = this.state.tipAmount[key].value
           }
         }
@@ -100,10 +113,12 @@ class PaymentForm extends Component {
           customTip: currentTip,
           customTipPercent: currentPercent
         })
+        this.props.adjustTip(this.props.bag.subTotal, 10, currentPercent)
       } else {
         this.setState({
           tipAmount: tipObj
         })
+        this.props.adjustTip(this.props.bag.subTotal, 10, this.state.tipAmount[button].value)
       }
     }
   }
@@ -157,19 +172,19 @@ class PaymentForm extends Component {
           <div className='row payment-btns'>
             <div className='col-md-6'>
               <button type='button' className={this.state.tipAmount.tip15.toggle ? 'btn btn-primary col-md-3 btn-large' : 'btn btn-default col-md-3 btn-large'} onClick={() => this.toggleTipAmount('tip15')}>
-                <div>{`$${((this.props.bag.subTotal + this.props.bag.subTotal * (1 / 10)) * (3 / 20)).toFixed(2)}`}</div>
+                <div>{`$${(this.state.subTotal * 1.1 * (3 / 20)).toFixed(2)}`}</div>
                 <div>15%</div>
               </button>
               <button type='button' className={this.state.tipAmount.tip20.toggle ? 'btn btn-primary col-md-3 btn-large' : 'btn btn-default col-md-3 btn-large'} onClick={() => this.toggleTipAmount('tip20')}>
-                <div>{`$${((this.props.bag.subTotal + this.props.bag.subTotal * (1 / 10)) * (1 / 5)).toFixed(2)}`}</div>
+                <div>{`$${(this.state.subTotal * 1.1 * (1 / 5)).toFixed(2)}`}</div>
                 <div>20%</div>
               </button>
               <button type='button' className={this.state.tipAmount.tip25.toggle ? 'btn btn-primary col-md-3 btn-large' : 'btn btn-default col-md-3 btn-large'} onClick={() => this.toggleTipAmount('tip25')}>
-                <div>{`$${((this.props.bag.subTotal + this.props.bag.subTotal * (1 / 10)) * (1 / 4)).toFixed(2)}`}</div>
+                <div>{`$${(this.state.subTotal * 1.1 * (1 / 4)).toFixed(2)}`}</div>
                 <div>25%</div>
               </button>
               <button type='button' className={this.state.tipAmount.tip30.toggle ? 'btn btn-primary col-md-3 btn-large' : 'btn btn-default col-md-3 btn-large'} onClick={() => this.toggleTipAmount('tip30')}>
-                <div>{`$${((this.props.bag.subTotal + this.props.bag.subTotal * (1 / 10)) * (3 / 10)).toFixed(2)}`}</div>
+                <div>{`$${(this.state.subTotal * 1.1 * (3 / 10)).toFixed(2)}`}</div>
                 <div>30%</div>
               </button>
             </div>
@@ -196,12 +211,14 @@ class PaymentForm extends Component {
 PaymentForm.propTypes = {
   redirectToCheckout: func,
   checkout: object,
-  bag: object
+  bag: object,
+  adjustTip: func
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    redirectToCheckout: () => dispatch(push('/checkout'))
+    redirectToCheckout: () => dispatch(push('/checkout')),
+    adjustTip: (total, tax, tip) => dispatch(adjustTip(total, tax, tip))
   }
 }
 
