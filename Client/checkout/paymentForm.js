@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { reduxForm, Field } from 'redux-form'
-import { adjustTip } from './checkoutActions'
+import { adjustTip, adjustCustomTip } from './checkoutActions'
 
 const { func, object } = React.PropTypes
 
@@ -46,6 +46,12 @@ class PaymentForm extends Component {
       customTip: event.target.value,
       customTipPercent: isNaN((event.target.value / (this.state.subTotal * 1.1) * 100).toFixed(0)) ? 0 : (event.target.value / (this.state.subTotal * 1.1) * 100).toFixed(0)
     })
+
+    if (isNaN((event.target.value / (this.state.subTotal * 1.1) * 100).toFixed(0))) {
+      this.props.adjustCustomTip(0)
+    } else {
+      this.props.adjustCustomTip(event.target.value)
+    }
   }
 
   toggleCreditOrCash (button) {
@@ -212,13 +218,15 @@ PaymentForm.propTypes = {
   redirectToCheckout: func,
   checkout: object,
   bag: object,
-  adjustTip: func
+  adjustTip: func,
+  adjustCustomTip: func
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     redirectToCheckout: () => dispatch(push('/checkout')),
-    adjustTip: (total, tax, tip) => dispatch(adjustTip(total, tax, tip))
+    adjustTip: (total, tax, tip) => dispatch(adjustTip(total, tax, tip)),
+    adjustCustomTip: (tipAmount) => dispatch(adjustCustomTip(tipAmount))
   }
 }
 
