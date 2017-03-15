@@ -85,7 +85,6 @@ class PaymentForm extends Component {
         }
       })
     }
-    
     if (button === 'cash') {
       this.props.adjustCustomTip(0)
     } else {
