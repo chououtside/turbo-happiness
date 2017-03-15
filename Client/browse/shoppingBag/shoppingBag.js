@@ -10,10 +10,9 @@ const { array, number, object, func } = React.PropTypes
 class ShoppingBag extends Component {
   render () {
     const { bag, emptyCart, checkout } = this.props
-
     let tipValue = checkout.tip
     let total = this.props.routing.locationBeforeTransitions.pathname !== '/payment' ? ((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2)))).toFixed(2) : ((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2))) + Number(this.props.checkout.tip.toFixed(2))).toFixed(2)
-    const tipComponent = this.props.routing.locationBeforeTransitions.pathname !== '/payment' ? <div className='tip-line' /> : (
+    const tipComponent = this.props.routing.locationBeforeTransitions.pathname !== '/payment' || Number(checkout.tip) === Number(0) ? <div className='tip-line' /> : (
       <div className='tip-line'>
         <span className='tip-header'>Tip</span>
         <span className='total-summary-filler' />
