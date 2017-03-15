@@ -406,3 +406,7 @@ a, .menu-item {
 	background-image: none;
 	box-shadow: none;
 }
+
+.custom-tip-input {
+	cursor: pointer;
+}
