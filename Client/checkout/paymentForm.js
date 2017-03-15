@@ -85,6 +85,13 @@ class PaymentForm extends Component {
         }
       })
     }
+    
+    if (button === 'cash') {
+      this.props.adjustCustomTip(0)
+    } else {
+      this.toggleTipAmount('tip20')
+      this.props.adjustTip(this.props.bag.subTotal, 10, 20)
+    }
   }
 
   toggleTipAmount (button) {
@@ -137,6 +144,40 @@ class PaymentForm extends Component {
   }
 
   render () {
+    const tipButtons = this.state.tip.cash ? <div /> : (
+      <div className='row payment-btns'>
+        <div className='col-md-6'>
+          <button type='button' className={this.state.tipAmount.tip15.toggle ? 'btn btn-primary col-md-3 btn-large' : 'btn btn-default col-md-3 btn-large'} onClick={() => this.toggleTipAmount('tip15')}>
+            <div>{`$${(this.state.subTotal * 1.1 * (3 / 20)).toFixed(2)}`}</div>
+            <div>15%</div>
+          </button>
+          <button type='button' className={this.state.tipAmount.tip20.toggle ? 'btn btn-primary col-md-3 btn-large' : 'btn btn-default col-md-3 btn-large'} onClick={() => this.toggleTipAmount('tip20')}>
+            <div>{`$${(this.state.subTotal * 1.1 * (1 / 5)).toFixed(2)}`}</div>
+            <div>20%</div>
+          </button>
+          <button type='button' className={this.state.tipAmount.tip25.toggle ? 'btn btn-primary col-md-3 btn-large' : 'btn btn-default col-md-3 btn-large'} onClick={() => this.toggleTipAmount('tip25')}>
+            <div>{`$${(this.state.subTotal * 1.1 * (1 / 4)).toFixed(2)}`}</div>
+            <div>25%</div>
+          </button>
+          <button type='button' className={this.state.tipAmount.tip30.toggle ? 'btn btn-primary col-md-3 btn-large' : 'btn btn-default col-md-3 btn-large'} onClick={() => this.toggleTipAmount('tip30')}>
+            <div>{`$${(this.state.subTotal * 1.1 * (3 / 10)).toFixed(2)}`}</div>
+            <div>30%</div>
+          </button>
+        </div>
+        <div className='col-md-6 custom-tip-input-group'>
+          <div className='input-group'>
+            <span className='input-group-btn'>
+              <button type='button' className={this.state.tipAmount.tipCustom.toggle ? 'btn btn-primary' : 'btn btn-default'} onClick={() => this.toggleTipAmount('tipCustom')}>
+                <div>Custom Tip</div>
+                <div>{this.state.customTipPercent}%</div>
+              </button>
+            </span>
+            <Field name='customTip' component='input' type='text' className='form-control custom-tip-input' props={{value: this.state.customTip}} onChange={this.customTipChange} placeholder='Custom tip amount' onClick={() => this.toggleTipAmount('tipCustom')} />
+          </div>
+        </div>
+      </div>
+    )
+
     const paymentBody = this.state.creditOrCash.cash ? <div className='payment-body' /> : (
       <div className='payment-body'>
         <div className='row'>
@@ -157,37 +198,7 @@ class PaymentForm extends Component {
             <button type='button' className={this.state.tip.cash ? 'btn btn-primary col-md-6 btn-large' : 'btn btn-default col-md-6 btn-large'} onClick={() => this.toggleTipCreditOrCash('cash')}>Tip with Cash</button>
           </div>
         </div>
-        <div className='row payment-btns'>
-          <div className='col-md-6'>
-            <button type='button' className={this.state.tipAmount.tip15.toggle ? 'btn btn-primary col-md-3 btn-large' : 'btn btn-default col-md-3 btn-large'} onClick={() => this.toggleTipAmount('tip15')}>
-              <div>{`$${(this.state.subTotal * 1.1 * (3 / 20)).toFixed(2)}`}</div>
-              <div>15%</div>
-            </button>
-            <button type='button' className={this.state.tipAmount.tip20.toggle ? 'btn btn-primary col-md-3 btn-large' : 'btn btn-default col-md-3 btn-large'} onClick={() => this.toggleTipAmount('tip20')}>
-              <div>{`$${(this.state.subTotal * 1.1 * (1 / 5)).toFixed(2)}`}</div>
-              <div>20%</div>
-            </button>
-            <button type='button' className={this.state.tipAmount.tip25.toggle ? 'btn btn-primary col-md-3 btn-large' : 'btn btn-default col-md-3 btn-large'} onClick={() => this.toggleTipAmount('tip25')}>
-              <div>{`$${(this.state.subTotal * 1.1 * (1 / 4)).toFixed(2)}`}</div>
-              <div>25%</div>
-            </button>
-            <button type='button' className={this.state.tipAmount.tip30.toggle ? 'btn btn-primary col-md-3 btn-large' : 'btn btn-default col-md-3 btn-large'} onClick={() => this.toggleTipAmount('tip30')}>
-              <div>{`$${(this.state.subTotal * 1.1 * (3 / 10)).toFixed(2)}`}</div>
-              <div>30%</div>
-            </button>
-          </div>
-          <div className='col-md-6 custom-tip-input-group'>
-            <div className='input-group'>
-              <span className='input-group-btn'>
-                <button type='button' className={this.state.tipAmount.tipCustom.toggle ? 'btn btn-primary' : 'btn btn-default'} onClick={() => this.toggleTipAmount('tipCustom')}>
-                  <div>Custom Tip</div>
-                  <div>{this.state.customTipPercent}%</div>
-                </button>
-              </span>
-              <Field name='customTip' component='input' type='text' className='form-control custom-tip-input' props={{value: this.state.customTip}} onChange={this.customTipChange} placeholder='Custom tip amount' onClick={() => this.toggleTipAmount('tipCustom')} />
-            </div>
-          </div>
-        </div>
+        {tipButtons}
       </div>
     )
 
