@@ -9,7 +9,6 @@ export function submitDeliveryInfo (values) {
 }
 
 export function adjustTip (total, tax, tip) {
-  // Create conditional to return null action if tip is not a number
   return {
     type: ADJUST_TIP,
     payload: (total * (1 + tax / 100) * (tip / 100)).toFixed(2)
