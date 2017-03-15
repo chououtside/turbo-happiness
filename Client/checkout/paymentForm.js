@@ -202,7 +202,7 @@ class PaymentForm extends Component {
                     <div>{this.state.customTipPercent}%</div>
                   </button>
                 </span>
-                <Field name='customTip' component='input' type='text' className='form-control custom-tip-input' props={{value: this.state.customTip}} onChange={this.customTipChange} placeholder='Custom tip amount' />
+                <Field name='customTip' component='input' type='text' className='form-control custom-tip-input' props={{value: this.state.customTip}} onChange={this.customTipChange} placeholder='Custom tip amount' onClick={() => this.toggleTipAmount('tipCustom')} />
               </div>
             </div>
           </div>
