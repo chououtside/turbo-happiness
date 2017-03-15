@@ -11,7 +11,7 @@ class Header extends Component {
       <header className='header group'>
         <h1 className='logo' onClick={() => this.props.redirectHome()}>ChineseGrub</h1>
 
-        <a href='#' className='bag'>
+        <a href='javascript:void(0)' className='bag' onClick={() => this.props.redirectToCheckout()}>
           <div className='bag-icon-section'>
             <img src='/img/bag.png' className='bag-icon' />
             <span className='bag-count'>{bag.quantityInCart}</span>
@@ -28,7 +28,8 @@ Header.propTypes = {
     subTotal: number,
     quantityInCart: number
   }),
-  redirectHome: func
+  redirectHome: func,
+  redirectToCheckout: func
 }
 
 function mapStateToProps ({ bag }) {
@@ -37,7 +38,8 @@ function mapStateToProps ({ bag }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    redirectHome: () => dispatch(push('/'))
+    redirectHome: () => dispatch(push('/')),
+    redirectToCheckout: () => dispatch(push('/checkout'))
   }
 }
 
