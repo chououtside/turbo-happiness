@@ -6,6 +6,10 @@ import { addToCart } from './menuActions'
 const { string, number, func } = React.PropTypes
 
 class MenuItemModal extends Component {
+  addItem (item, quantity, price) {
+    this.props.addToCart(item, quantity, price)
+  }
+
   render () {
     return (
       <div className='modal fade' id={`${this.props.id}-modal`} tabIndex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
@@ -52,7 +56,7 @@ class MenuItemModal extends Component {
                 type='button'
                 className='btn btn-primary'
                 data-dismiss='modal'
-                onClick={() => this.props.addToCart(this.props.name, this.refs[`${this.props.id}-quantity`].value, this.props.price)
+                onClick={() => this.addItem(this.props.name, this.refs[`${this.props.id}-quantity`].value, this.props.price)
                 }
               >
                 Add to Cart
