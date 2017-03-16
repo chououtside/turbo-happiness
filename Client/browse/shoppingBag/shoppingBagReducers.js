@@ -1,5 +1,5 @@
 import { ADD_TO_CART } from '../menu/menuActions'
-import { EMPTY_CART, REMOVE_ITEM } from './shoppingBagActions'
+import { EMPTY_CART, REMOVE_ITEM, SET_CURRENT_RESTAURANT_FOR_BAG } from './shoppingBagActions'
 
 const initialState = {
   items: [],
@@ -27,6 +27,8 @@ export default (state = initialState, action) => {
       items.splice(action.payload.index, 1)
 
       return { ...state, items, subTotal, quantityInCart }
+    case SET_CURRENT_RESTAURANT_FOR_BAG:
+      return { ...state, currentRestaurant: action.payload }
     default:
       return state
   }
