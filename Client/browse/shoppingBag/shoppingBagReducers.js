@@ -4,13 +4,15 @@ import { EMPTY_CART, REMOVE_ITEM } from './shoppingBagActions'
 const initialState = {
   items: [],
   subTotal: 0,
-  quantityInCart: 0
+  quantityInCart: 0,
+  currentRestaurant: null
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       return {
+        ...state,
         items: [...state.items, { item: action.payload.item, quantity: action.payload.quantity, price: action.payload.price }],
         subTotal: state.subTotal + (action.payload.quantity * action.payload.price),
         quantityInCart: state.quantityInCart + Number(action.payload.quantity)
@@ -24,7 +26,7 @@ export default (state = initialState, action) => {
 
       items.splice(action.payload.index, 1)
 
-      return { items, subTotal, quantityInCart }
+      return { ...state, items, subTotal, quantityInCart }
     default:
       return state
   }
