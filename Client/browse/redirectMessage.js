@@ -4,6 +4,8 @@ import { emptyCart } from './shoppingBag/shoppingBagActions'
 import { fetchMenu } from './menu/menuActions'
 import { push } from 'react-router-redux'
 
+const { object, func } = React.PropTypes
+
 class RedirectMessage extends Component {
   redirectToActiveMenu () {
     let { id } = this.props.bag.currentRestaurant
@@ -19,7 +21,7 @@ class RedirectMessage extends Component {
   }
 
   render () {
-    let { bag, emptyCart, redirectToActiveMenu } = this.props
+    let { bag } = this.props
 
     return (
       <div className='redirect-message'>
@@ -42,6 +44,14 @@ function mapDispatchToProps (dispatch) {
     redirectToActiveMenu: (id) => dispatch(push(`/restaurants/${id}/menu`)),
     fetchMenu: id => dispatch(fetchMenu(id))
   }
+}
+
+RedirectMessage.propTypes = {
+  emptyCart: func,
+  redirectToActiveMenu: func,
+  fetchMenu: func,
+  bag: object,
+  routing: object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RedirectMessage)
