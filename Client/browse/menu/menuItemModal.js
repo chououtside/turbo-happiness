@@ -2,12 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { IntlProvider, FormattedNumber } from 'react-intl'
 import { addToCart } from './menuActions'
+import { setCurrentRestaurant } from '../shoppingBag/shoppingBagActions'
 
-const { string, number, func } = React.PropTypes
+const { string, number, func, object } = React.PropTypes
 
 class MenuItemModal extends Component {
   addItem (item, quantity, price) {
-    this.props.addToCart(item, quantity, price)
+    let { restaurant } = this.props.menu
+    if (this.props.bag.items.length === 0) {
+      this.props.setCurrentRestaurant(restaurant.id, restaurant.name)
+      this.props.addToCart(item, quantity, price)
+    } else {
+      this.props.addToCart(item, quantity, price)
+    }
   }
 
   render () {
@@ -73,13 +80,21 @@ MenuItemModal.propTypes = {
   addToCart: func,
   price: string,
   name: string,
-  id: number
+  id: number,
+  menu: object,
+  bag: object,
+  setCurrentRestaurant: func
+}
+
+function mapStateToProps ({ bag, menu }) {
+  return { bag, menu }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    addToCart: (item, quantity, price) => dispatch(addToCart(item, quantity, price))
+    addToCart: (item, quantity, price) => dispatch(addToCart(item, quantity, price)),
+    setCurrentRestaurant: (id, name) => dispatch(setCurrentRestaurant(id, name))
   }
 }
 
-export default connect(null, mapDispatchToProps)(MenuItemModal)
+export default connect(mapStateToProps, mapDispatchToProps)(MenuItemModal)
