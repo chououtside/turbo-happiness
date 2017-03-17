@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Menu from './menu/menu'
 import RestaurantBanner from './menu/restaurantBanner'
 import ShoppingBag from './shoppingBag/shoppingBag'
+import RedirectMessage from './redirectMessage'
 import { fetchMenu } from './menu/menuActions'
 
 const { func, object } = React.PropTypes
@@ -14,21 +15,39 @@ class BrowseContainer extends Component {
   }
 
   render () {
-    return (
-      <div className='browse-container'>
-        <div className='order-section'>
-          <RestaurantBanner />
-          <Menu />
+    let { bag, params } = this.props
+
+    if (bag.currentRestaurant === null || bag.currentRestaurant.id === Number(params.restaurantId)) {
+      return (
+        <div className='browse-container'>
+          <div className='order-section'>
+            <RestaurantBanner />
+            <Menu />
+          </div>
+          <ShoppingBag />
         </div>
-        <ShoppingBag />
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div className='browse-container'>
+          <div className='order-section'>
+            <RedirectMessage />
+          </div>
+          <ShoppingBag />
+        </div>
+      )
+    }
   }
 }
 
 BrowseContainer.propTypes = {
   fetchMenu: func,
-  params: object
+  params: object,
+  bag: object
+}
+
+function mapStateToProps ({ bag }) {
+  return { bag }
 }
 
 function mapDispatchToProps (dispatch) {
@@ -37,4 +56,4 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(BrowseContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(BrowseContainer)
