@@ -1,7 +1,7 @@
 import { SUBMIT_DELIVERY_FORM, ADJUST_TIP, CUSTOM_TIP_ADJUSTMENT } from './checkoutActions'
 
 const initialState = {
-  deliveryForm: {},
+  deliveryForm: null,
   paymentForm: {},
   tip: 0
 }
