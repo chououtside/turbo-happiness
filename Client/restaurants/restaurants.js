@@ -17,7 +17,7 @@ class Restaurants extends Component {
       <div className='restaurants'>
         <RestaurantsBanner />
         <div className='search'>
-          <div className='search-results'><span>1 - 20</span> <span>of</span> <span>212</span> <span>near you</span></div>
+          <div className='search-results'><span>1 - {this.props.restaurants.length}</span> <span>of</span> <span>{this.props.restaurants.length}</span> <span>near you</span></div>
           {this.props.restaurants.map(restaurant =>
             <RestaurantCard {...restaurant} key={restaurant.id} />
           )}
