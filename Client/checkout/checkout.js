@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ShoppingBag from '../browse/shoppingBag/shoppingBag'
 import DeliveryForm from './deliveryForm'
+import RedirectRestaurants from './redirectToRestaurants'
 
 const { object } = React.PropTypes
 
@@ -9,7 +10,12 @@ class Checkout extends Component {
   render () {
     if (this.props.bag.items.length === 0) {
       return (
-        
+        <div className='browse-container'>
+          <div className='order-section'>
+            <RedirectRestaurants />
+          </div>
+          <ShoppingBag />
+        </div>
       )
     } else {
       return (
