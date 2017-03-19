@@ -424,3 +424,7 @@ a, .menu-item {
 .redirect-message h2 {
 	padding-bottom: 15px;
 }
+
+h2.redirect-checkout-padding {
+	padding: 10px 10px 30px;
+}
