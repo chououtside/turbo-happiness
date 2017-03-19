@@ -30,10 +30,10 @@ class ShoppingBag extends Component {
       return (
         <div className='shopping-section'>
           <div className='customer-section'>
-            <div className='order-title'>Your order</div>
+            <div className='order-title'>Your Current Order</div>
             <div className='customer-info'>
               <p>Deliver, ASAP(55-65m)</p>
-              <p>To: 2020 P St NW, Washington, DC, 20036</p>
+              <p>From: {bag.currentRestaurant.name}</p>
               <a className='change-address'>Change</a>
             </div>
           </div>
