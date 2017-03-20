@@ -15,9 +15,9 @@ export function removeItem (index, quantity, price) {
   }
 }
 
-export function setCurrentRestaurant (id, name) {
+export function setCurrentRestaurant (id, name, phoneNumber, streetAddress, city, state, zipcode) {
   return {
     type: SET_CURRENT_RESTAURANT_FOR_BAG,
-    payload: { id, name }
+    payload: { id, name, phoneNumber, streetAddress, city, state, zipcode }
   }
 }
