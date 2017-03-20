@@ -1,0 +1,1 @@
+export function emailCreator (customerInfo, orderInfo, restaurantInfo) 
