@@ -8,9 +8,9 @@ const { string, number, func, object } = React.PropTypes
 
 class MenuItemModal extends Component {
   addItem (item, quantity, price) {
-    let { restaurant } = this.props.menu
+    let { id, name, phone_number, street_address, city, state, zipcode } = this.props.menu.restaurant
     if (this.props.bag.items.length === 0) {
-      this.props.setCurrentRestaurant(restaurant.id, restaurant.name)
+      this.props.setCurrentRestaurant(id, name, phone_number, street_address, city, state, zipcode)
       this.props.addToCart(item, quantity, price)
     } else {
       this.props.addToCart(item, quantity, price)
@@ -93,7 +93,7 @@ function mapStateToProps ({ bag, menu }) {
 function mapDispatchToProps (dispatch) {
   return {
     addToCart: (item, quantity, price) => dispatch(addToCart(item, quantity, price)),
-    setCurrentRestaurant: (id, name) => dispatch(setCurrentRestaurant(id, name))
+    setCurrentRestaurant: (id, name, phone_number, street_address, city, state, zipcode) => dispatch(setCurrentRestaurant(id, name, phone_number, street_address, city, state, zipcode))
   }
 }
 
