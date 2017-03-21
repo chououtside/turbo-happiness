@@ -3,14 +3,13 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { reduxForm, Field } from 'redux-form'
 import { adjustTip, adjustCustomTip } from './checkoutActions'
+import { sendEmail } from '../email/email'
 
 const { func, object } = React.PropTypes
 
 class PaymentForm extends Component {
   constructor (props) {
     super(props)
-    // console.log('this is props', this.props.adjustTip)
-    // console.log('this is prop object', this.props)
     this.state = {
       customTip: '',
       customTipPercent: 0,
@@ -34,12 +33,17 @@ class PaymentForm extends Component {
 
     this.customTipChange = this.customTipChange.bind(this)
     this.toggleTipAmount = this.toggleTipAmount.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
   componentWillMount () {
     if (this.props.checkout.deliveryForm) {
       this.props.adjustTip(this.props.bag.subTotal, 10, 20)
     }
+  }
+
+  onSubmit (values) {
+    sendEmail(values, this.props.bag)
   }
 
   customTipChange (event) {
@@ -143,6 +147,8 @@ class PaymentForm extends Component {
   }
 
   render () {
+    const { handleSubmit } = this.props
+
     const tipButtons = this.state.tip.cash ? <div /> : (
       <div className='row payment-btns'>
         <div className='col-md-6'>
@@ -206,7 +212,7 @@ class PaymentForm extends Component {
     } else {
       let { firstName, lastName, address1, address2, city, state, zipcode, phoneNumber } = this.props.checkout.deliveryForm
       return (
-        <form className='payment-form'>
+        <form className='payment-form' onSubmit={handleSubmit(this.onSubmit)}>
           <div className='row'>
             <div className='col-md-6'>
               <div className='body'><span>Deliver on {Date().toString().substring(4, 10)} ASAP to</span></div>
@@ -242,7 +248,8 @@ PaymentForm.propTypes = {
   checkout: object,
   bag: object,
   adjustTip: func,
-  adjustCustomTip: func
+  adjustCustomTip: func,
+  handleSubmit: func
 }
 
 function mapDispatchToProps (dispatch) {
