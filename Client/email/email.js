@@ -1,5 +1,19 @@
 /* global emailjs */
 
+const convertDateTime = (date) => {
+  const convertTime = (time) => {
+    let hour = Number(time.substring(0, 2))
+    if (hour > 12) {
+      hour = hour - 12
+    }
+    return Number(time.substring(0,2)) < 12 ? `${hour}${time.substring(2,5)} AM` : `${hour}${time.substring(2,5)} PM`
+  }
+  return {
+    time: convertTime(date.substring(16,21)),
+    date: `${date.substring(4,10)}, ${date.substring(11,16)}`
+  }
+}
+
 const emailCreator = (customerInfo, orderInfo, tipAmount) => {
   
 }
