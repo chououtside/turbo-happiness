@@ -1,37 +1,85 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 <head>
-	<meta charset='UTF-8'>
+	<meta charset="UTF-8">
 	<title>Document</title>
 	<style>
+		body {
+			padding: 10px 25px;
+		}
+		span {
+			font-weight: bold;
+		};
+		.delivery-info div {
+			margin-bottom: 15px;
+		}
+
+		.customer-info {
+			margin-bottom: 20px;
+		}
+		.customer-info p, .restaurant-info p {
+			margin: 0;
+			margin-bottom: 5px;
+			padding: 0;
+		}
 	</style>
 </head>
 <body>
 	<div>
 		<h1>7:11 PM Delivery</h1>
 		<p>Deliver before 7:11 on Mar 10, 2017</p>
+		<div class="delivery-info">
+			<div class="customer-info">
+				<p><span>Deliver To: </span>Stacy Edgar</p>
+				<p><span>858-243-1040</span></p>
+				<p>1355 17th St NW</p>
+				<p>322</p>
+				<p>Washington, DC 20036</p>
+				<p><span>Order Instructions:</span> dial call box for Stacy edgar to enter building</p>
+			</div>
+			<div class="restaurant-info">
+				<p><span>Delivery From: </span>New Dynasty</p>
+				<p><span>202-296-6688</span></p>
+				<p>2020 P St NW</p>
+				<p>Washington, DC 20036</p>
+			</div>
+		</div>
+		<h3>ORDER</h3>
 		<table>
 			<tr>
-				<th align='middle'>Quantity</th>
-				<th align='left'>Description</th>
-				<th align='right'>Price</th>
+				<th align="middle">Quantity</th>
+				<th align="left">Description</th>
+				<th align="right">Price</th>
 			</tr>
 			<tr>
-				<td align='right'>1</td>
-				<td align='left'>Kung Pao Chicken</td>
-				<td align='right'>$14.95</td>
+				<td align="right">1</td>
+				<td align="left">Kung Pao Chicken</td>
+				<td align="right">$14.95</td>
 			</tr>
 			<tr>
-				<td align='right'>1</td>
-				<td align='left'>Hot Sour Soup</td>
-				<td align='right'>$3.25</td>
+				<td align="right">1</td>
+				<td align="left">Hot Sour Soup</td>
+				<td align="right">$3.25</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
-				<td>Subtotal: $18.20</td>
+				<td align="right">Subtotal: $18.20</td>
 			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td align="right">Tip: $1.20</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td align="right">Total: $19.40</td>
+			</tr>			
 		</table>
+	</div>
+	<div>
+		<p>Credit card info is not shown, due to this site being used for demo purposes</p>
 	</div>
 </body>
 </html>
