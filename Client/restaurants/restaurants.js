@@ -12,7 +12,6 @@ class Restaurants extends Component {
   }
 
   render () {
-    // emailjs.send("chouming3@gmail.com", "testing", {"name":"alex","notes":"<h1>bold</h1>"})
     return (
       <div className='restaurants'>
         <RestaurantsBanner />
