@@ -56,7 +56,6 @@ class PaymentForm extends Component {
         }
       }
     }
-    sendEmail(values, this.props.bag)
   }
 
   customTipChange (event) {
