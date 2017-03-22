@@ -23,8 +23,20 @@ const emailCreator = (customerInfo, orderInfo, tipAmount) => {
   
 }
 
-const orderCreator = (bag) => {
+const itemBreakdown = (itemsInBag) => {
+  let tableRows = ''
 
+  const tableRow = (quantity, item, price) => {
+    return `<tr><td align="right">${quantity}</td><td align="left">${item}</td><td align="right">$${price}</td></tr>`
+  }
+
+  
+  for (let i = 0; i < itemsInBag.length; i++) {
+    let item = itemsInBag[i]
+    tableRows = tableRows + tableRow(item.quantity, item.item, item.price)
+  }
+
+  return `<tr><th align="middle">Quantity</th><th align="left">Description</th><th align="right">Price</th></tr>${tableRows}`
 }
 
 const customerInfoCreator = (customerInfoObject) => {
@@ -56,17 +68,18 @@ const restaurantInfoCreator = (restaurantInfoObject) => {
   return `<div class="restaurant-info"><p><span>Delivery From: </span>${name}</p><p><span>${phoneNumber}</span></p><p>${streetAddress}</p><p>${city}, ${state} ${zipcode}</p></div>`
 }
 
-export function sendEmail (customerInfo, orderInfo, tipAmount) {
+export function sendEmail (customerInfo, bag, tipAmount) {
   // emailjs.send('chouming3@gmail.com', 'chinesegrub', {
   //   'name': `${customerInfo.firstName} ${customerInfo.lastName}`,
   //   'email': customerInfo.email,
-  //   'restaurant': orderInfo.currentRestaurant.name,
+  //   'restaurant': bag.currentRestaurant.name,
   //   'details': null
   // })
   console.log(arguments, 'this is arguments')
-  let html = emailCreator(customerInfo, orderInfo, tipAmount)
+  let html = emailCreator(customerInfo, bag, tipAmount)
   console.log(customerInfoCreator(customerInfo))
   console.log(Date().toString(), 'heres the date')
   console.log('this is the date time object', convertDateTime(Date().toString()))
   console.log('this is the header object', headerCreator())
+  console.log('this is table rows', itemBreakdown(bag.items))
 }
