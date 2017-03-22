@@ -43,6 +43,19 @@ class PaymentForm extends Component {
   }
 
   onSubmit (values) {
+    if (this.state.creditOrCash.cash || this.state.tip.cash) {
+      sendEmail(values, this.props.bag, 0)
+    } else {
+      if (this.state.tipAmount.tipCustom.toggle) {
+        sendEmail(values, this.props.bag, this.state.customTip)
+      } else {
+        for (let key in this.state.tipAmount) {
+          if (this.state.tipAmount[key].toggle) {
+            sendEmail(values, this.props.bag, (this.state.subTotal * 1.1 * (this.state.tipAmount[key].value / 100)).toFixed(2))
+          }
+        }
+      }
+    }
     sendEmail(values, this.props.bag)
   }
 
