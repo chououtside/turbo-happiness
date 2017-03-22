@@ -14,6 +14,11 @@ const convertDateTime = (date) => {
   }
 }
 
+const headerCreator = () => {
+  let dateTime = convertDateTime(Date().toString())
+  return `<h1>${dateTime.time} Delivery</h1><p>Deliver before ${dateTime.time} on ${dateTime.date}</p>`
+}
+
 const emailCreator = (customerInfo, orderInfo, tipAmount) => {
   
 }
@@ -63,4 +68,5 @@ export function sendEmail (customerInfo, orderInfo, tipAmount) {
   console.log(customerInfoCreator(customerInfo))
   console.log(Date().toString(), 'heres the date')
   console.log('this is the date time object', convertDateTime(Date().toString()))
+  console.log('this is the header object', headerCreator())
 }
