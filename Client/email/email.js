@@ -29,7 +29,6 @@ const itemBreakdown = (itemsInBag) => {
   const tableRow = (quantity, item, price) => {
     return `<tr><td align="right">${quantity}</td><td align="left">${item}</td><td align="right">$${price}</td></tr>`
   }
-
   
   for (let i = 0; i < itemsInBag.length; i++) {
     let item = itemsInBag[i]
@@ -37,6 +36,12 @@ const itemBreakdown = (itemsInBag) => {
   }
 
   return `<tr><th align="middle">Quantity</th><th align="left">Description</th><th align="right">Price</th></tr>${tableRows}`
+}
+
+const costBreakdown = (subtotal, tax, tip) => {
+  console.log(arguments, 'this is argments from costbreakdsown')
+  let taxAmount = Number((subtotal * (tax / 100)))
+  return `<tr><td></td><td></td><td align="right">Subtotal: $${Number(subtotal).toFixed(2)}</td></tr><tr><td></td><td></td><td align="right">tax: $${taxAmount.toFixed(2)}</td></tr><tr><td></td><td></td><td align="right">Tip: $${Number(tip).toFixed(2)}</td></tr><tr><td></td><td></td><td align="right">Total: $${(Number(subtotal) + Number(tip) + taxAmount).toFixed(2)}</td></tr>`
 }
 
 const customerInfoCreator = (customerInfoObject) => {
@@ -75,11 +80,14 @@ export function sendEmail (customerInfo, bag, tipAmount) {
   //   'restaurant': bag.currentRestaurant.name,
   //   'details': null
   // })
+  // console.log(customerInfoCreator(customerInfo))
+  // console.log(Date().toString(), 'heres the date')
+  // console.log('this is the date time object', convertDateTime(Date().toString()))
+  // console.log('this is the header object', headerCreator())
+  // console.log('this is table rows', itemBreakdown(bag.items))
+  // let html = emailCreator(customerInfo, bag, tipAmount)
   console.log(arguments, 'this is arguments')
-  let html = emailCreator(customerInfo, bag, tipAmount)
-  console.log(customerInfoCreator(customerInfo))
-  console.log(Date().toString(), 'heres the date')
-  console.log('this is the date time object', convertDateTime(Date().toString()))
-  console.log('this is the header object', headerCreator())
-  console.log('this is table rows', itemBreakdown(bag.items))
+  console.log(bag.subTotal, 'this is the bag subtotatl')
+  console.log('this is tip amount', tipAmount)
+  console.log(costBreakdown(bag.subTotal, 10, tipAmount))
 }
