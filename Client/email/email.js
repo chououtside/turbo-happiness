@@ -19,7 +19,14 @@ const headerCreator = () => {
   return `<h1>${dateTime.time} Delivery</h1><p>Deliver before ${dateTime.time} on ${dateTime.date}</p>`
 }
 
-const emailCreator = (customerInfo, orderInfo, tipAmount) => {
+const emailCreator = (customerInfo, bag, tipAmount) => {
+  let header = headerCreator()
+  let customerDetails = customerInfoCreator(customerInfo)
+  let restaurantDetails = restaurantInfoCreator(bag.currentRestaurant)
+  let itemDetails = itemBreakdown(bag.items)
+  let costDetails = costBreakdown(bag.subTotal, 10, tipAmount)
+
+  return `<html lang="en"><head><meta charset="UTF-8"><title>Document</title><style>body {padding: 10px 25px;}span {font-weight: bold;}.delivery-info div {margin-bottom: 15px;}.customer-info {margin-bottom: 20px;}.customer-info p, .restaurant-info p {margin: 0;margin-bottom: 5px;padding: 0;}</style></head><body><div>${header}<div class="delivery-info">${customerDetails}${restaurantDetails}</div><h3>ORDER DETAILS</h3><table>${itemDetails}${costDetails}</table></div><div><p>Credit card info is not shown, due to this site being used for demo purposes</p></div></body></html>`
   
 }
 
@@ -39,7 +46,6 @@ const itemBreakdown = (itemsInBag) => {
 }
 
 const costBreakdown = (subtotal, tax, tip) => {
-  console.log(arguments, 'this is argments from costbreakdsown')
   let taxAmount = Number((subtotal * (tax / 100)))
   return `<tr><td></td><td></td><td align="right">Subtotal: $${Number(subtotal).toFixed(2)}</td></tr><tr><td></td><td></td><td align="right">tax: $${taxAmount.toFixed(2)}</td></tr><tr><td></td><td></td><td align="right">Tip: $${Number(tip).toFixed(2)}</td></tr><tr><td></td><td></td><td align="right">Total: $${(Number(subtotal) + Number(tip) + taxAmount).toFixed(2)}</td></tr>`
 }
@@ -56,6 +62,9 @@ const customerInfoCreator = (customerInfoObject) => {
     zipcode,
     specialInstructions
   } = customerInfoObject
+
+  specialInstructions = !specialInstructions ? '' : specialInstructions
+  address2 = !address2 ? '' : address2
 
   return `<div class="customer-info"><p><span>Deliver To: </span>${firstName} ${lastName}</p><p><span>${phoneNumber}</span></p><p>${address1}</p><p>${address2}</p><p>${city}, ${state} ${zipcode}</p><p><span>Order Instructions:</span> ${specialInstructions}</p></div>`
 }
@@ -74,20 +83,10 @@ const restaurantInfoCreator = (restaurantInfoObject) => {
 }
 
 export function sendEmail (customerInfo, bag, tipAmount) {
-  // emailjs.send('chouming3@gmail.com', 'chinesegrub', {
-  //   'name': `${customerInfo.firstName} ${customerInfo.lastName}`,
-  //   'email': customerInfo.email,
-  //   'restaurant': bag.currentRestaurant.name,
-  //   'details': null
-  // })
-  // console.log(customerInfoCreator(customerInfo))
-  // console.log(Date().toString(), 'heres the date')
-  // console.log('this is the date time object', convertDateTime(Date().toString()))
-  // console.log('this is the header object', headerCreator())
-  // console.log('this is table rows', itemBreakdown(bag.items))
-  // let html = emailCreator(customerInfo, bag, tipAmount)
-  console.log(arguments, 'this is arguments')
-  console.log(bag.subTotal, 'this is the bag subtotatl')
-  console.log('this is tip amount', tipAmount)
-  console.log(costBreakdown(bag.subTotal, 10, tipAmount))
+  emailjs.send('chouming3@gmail.com', 'chinesegrub', {
+    'name': `${customerInfo.firstName} ${customerInfo.lastName}`,
+    'email': customerInfo.email,
+    'restaurant': bag.currentRestaurant.name,
+    'details': emailCreator(customerInfo, bag, tipAmount)
+  })
 }
