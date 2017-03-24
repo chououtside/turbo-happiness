@@ -83,10 +83,11 @@ const restaurantInfoCreator = (restaurantInfoObject) => {
 }
 
 export function sendEmail (customerInfo, bag, tipAmount) {
-  emailjs.send('chouming3@gmail.com', 'chinesegrub', {
-    'name': `${customerInfo.firstName} ${customerInfo.lastName}`,
-    'email': customerInfo.email,
-    'restaurant': bag.currentRestaurant.name,
-    'details': emailCreator(customerInfo, bag, tipAmount)
-  })
+  // emailjs.send('chouming3@gmail.com', 'chinesegrub', {
+  //   'name': `${customerInfo.firstName} ${customerInfo.lastName}`,
+  //   'email': customerInfo.email,
+  //   'restaurant': bag.currentRestaurant.name,
+  //   'details': emailCreator(customerInfo, bag, tipAmount)
+  // })
+  alert('email sent!!!')
 }

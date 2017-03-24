@@ -309,24 +309,30 @@ a, .menu-item {
 
 .search-results {
 	padding: 12px;
-	border-bottom: 2px solid rgba(0,0,0,.2)
+	border-bottom: 2px solid rgba(0,0,0,.2);
 }
 
 .restaurant-card {
-	padding: 10px 20px;
-	border-bottom: 2px solid rgba(0,0,0,.2)
+	padding: 10px 20px 20px;
+	border-bottom: 2px solid rgba(0,0,0,.2);
+	display: flex;
 }
 
 .restaurant-card div {
 	display: inline-block;
+	position: relative
 }
 
-.restaurant-card div div {
+.restaurant-card div div div{
 	display: block;
 }
 
 .restaurant-card img {
 	max-width: 120px;
+}
+
+.restaurant-info {
+	align-self: flex-end;
 }
 
 .restaurant-primary-info {
