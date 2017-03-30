@@ -34,7 +34,7 @@ class ShoppingBag extends Component {
             <div className='customer-info'>
               <p>Deliver, ASAP(55-65m)</p>
               <p>From: {bag.currentRestaurant.name}</p>
-              <a className='change-address'>Change</a>
+              <a className='change-address' href='javascript:void(0)' onClick={() => this.props.redirectHome()}>Change</a>
             </div>
           </div>
           <div className='cost-section'>
@@ -77,12 +77,14 @@ function mapStateToProps ({ bag, routing, checkout }) {
 
 function mapDispatchToProps (dispatch) {
   return {
+    redirectHome: () => dispatch(push('/')),
     emptyCart: () => dispatch(emptyCart()),
     redirectToCheckout: () => dispatch(push('/checkout'))
   }
 }
 
 ShoppingBag.propTypes = {
+  redirectHome: func,
   shoppingCart: array,
   subTotal: number,
   bag: object,
