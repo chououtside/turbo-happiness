@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { IntlProvider, FormattedNumber } from 'react-intl'
 import { removeItem } from './shoppingBagActions'
 
-const ShoppingItem = ({price, item, quantity, removeItem, index}) => (
+const ShoppingItem = ({price, item, quantity, removeItem, index, routing}) => (
   <div className='shopping-item'>
     <div className='remove-section'>
-      <a href='javascript:void(0)' onClick={() => removeItem(index, quantity, price)}><span className='glyphicon glyphicon-minus remove-item-btn' aria-hidden='true' /></a>
+      <a href='javascript:void(0)' onClick={() => removeItem(index, quantity, price)}><span className={routing.locationBeforeTransitions.pathname.substring(0, 12) === '/restaurants' ? 'glyphicon glyphicon-minus remove-item-btn' : 'hidden'} aria-hidden='true' /></a>
     </div>
     <div className='quantity-section'>
       <span>{quantity}</span>
@@ -20,14 +20,19 @@ const ShoppingItem = ({price, item, quantity, removeItem, index}) => (
   </div>
 )
 
-const { string, number, func } = React.PropTypes
+const { string, number, func, object } = React.PropTypes
 
 ShoppingItem.propTypes = {
+  routing: object,
   price: string,
   item: string,
   quantity: string,
   index: number,
   removeItem: func
+}
+
+function mapStateToProps ({ routing }) {
+  return { routing }
 }
 
 function mapDispatchToProps (dispatch) {
@@ -36,4 +41,4 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(ShoppingItem)
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingItem)
