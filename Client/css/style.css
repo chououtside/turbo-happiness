@@ -127,6 +127,10 @@ a, .menu-item {
 	display: none;
 }
 
+.hidden {
+	display: none;
+}
+
 .total-summary {
 	margin-top: 4%;
 }
