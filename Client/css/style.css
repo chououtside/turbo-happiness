@@ -123,6 +123,10 @@ a, .menu-item {
 	bottom: 0;
 }
 
+.checkout-btn-hidden {
+	display: none;
+}
+
 .total-summary {
 	margin-top: 4%;
 }

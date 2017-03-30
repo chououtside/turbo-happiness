@@ -63,7 +63,7 @@ class ShoppingBag extends Component {
           </div>
           <div className='checkout-section'>
             {/** <Link to='/' className='btn btn-primary btn-md'>Proceed to Checkout: {`$${((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2)))).toFixed(2)}`}</Link> **/}
-            <button type='button' className='btn btn-primary btn-md checkout-btn' onClick={() => this.props.redirectToCheckout()}>Proceed to Checkout: {`$${((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2)))).toFixed(2)}`}</button>
+            <button type='button' className={this.props.routing.locationBeforeTransitions.pathname.substring(0, 12) === '/restaurants' ? 'btn btn-primary btn-md checkout-btn' : 'btn btn-primary btn-md checkout-btn-hidden'} onClick={() => this.props.redirectToCheckout()}>Proceed to Checkout: {`$${((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2)))).toFixed(2)}`}</button>
           </div>
         </div>
       )
