@@ -9,10 +9,12 @@ const { array, number, object, func } = React.PropTypes
 
 class ShoppingBag extends Component {
   render () {
-    const { bag, emptyCart, checkout } = this.props
+    const { bag, emptyCart, checkout, routing } = this.props
+    const { pathname } = routing.locationBeforeTransitions
+
     let tipValue = checkout.tip
-    let total = this.props.routing.locationBeforeTransitions.pathname !== '/payment' ? ((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2)))).toFixed(2) : ((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2))) + Number(this.props.checkout.tip.toFixed(2))).toFixed(2)
-    const tipComponent = this.props.routing.locationBeforeTransitions.pathname !== '/payment' || Number(checkout.tip) === Number(0) ? <div className='tip-line' /> : (
+    let total = pathname !== '/payment' ? ((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2)))).toFixed(2) : ((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2))) + Number(this.props.checkout.tip.toFixed(2))).toFixed(2)
+    const tipComponent = pathname !== '/payment' || Number(checkout.tip) === Number(0) ? <div className='tip-line' /> : (
       <div className='tip-line'>
         <span className='tip-header'>Tip</span>
         <span className='total-summary-filler' />
@@ -58,13 +60,13 @@ class ShoppingBag extends Component {
                 <span className='total-summary-filler' />
                 <span className='sales-tax-value'>{`$${total}`}</span>
               </div>
-              <a className={this.props.routing.locationBeforeTransitions.pathname.substring(0, 12) === '/restaurants' ? 'empty-cart' : 'hidden'} href='javascript:void(0)' onClick={() => emptyCart()}>Empty Cart</a>
+              <a className={pathname.substring(0, 12) === '/restaurants' ? 'empty-cart' : 'hidden'} href='javascript:void(0)' onClick={() => emptyCart()}>Empty Cart</a>
             </div>
           </div>
           <div className='checkout-section'>
             {/** <Link to='/' className='btn btn-primary btn-md'>Proceed to Checkout: {`$${((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2)))).toFixed(2)}`}</Link> **/}
-            <button type='button' className={this.props.routing.locationBeforeTransitions.pathname.substring(0, 12) === '/restaurants' ? 'btn btn-primary btn-md checkout-btn' : 'btn btn-primary btn-md checkout-btn-hidden'} onClick={() => this.props.redirectToCheckout()}>Proceed to Checkout: {`$${((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2)))).toFixed(2)}`}</button>
-            <button type='button' className={this.props.routing.locationBeforeTransitions.pathname.substring(0, 9) === '/checkout' ? 'btn btn-primary btn-md checkout-btn' : 'btn btn-primary btn-md checkout-btn-hidden'} onClick={() => this.props.redirectToActiveMenu(this.props.bag.currentRestaurant.id)}>Edit Order</button>
+            <button type='button' className={pathname.substring(0, 12) === '/restaurants' ? 'btn btn-primary btn-md checkout-btn' : 'btn btn-primary btn-md checkout-btn-hidden'} onClick={() => this.props.redirectToCheckout()}>Proceed to Checkout: {`$${((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2)))).toFixed(2)}`}</button>
+            <button type='button' className={pathname === '/checkout' || pathname === '/payment' ? 'btn btn-primary btn-md checkout-btn' : 'btn btn-primary btn-md checkout-btn-hidden'} onClick={() => this.props.redirectToActiveMenu(this.props.bag.currentRestaurant.id)}>Edit Order</button>
           </div>
         </div>
       )
