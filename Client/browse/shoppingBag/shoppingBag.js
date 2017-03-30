@@ -58,7 +58,7 @@ class ShoppingBag extends Component {
                 <span className='total-summary-filler' />
                 <span className='sales-tax-value'>{`$${total}`}</span>
               </div>
-              <a className='empty-cart' href='javascript:void(0)' onClick={() => emptyCart()}>Empty Cart</a>
+              <a className={this.props.routing.locationBeforeTransitions.pathname.substring(0, 12) === '/restaurants' ? 'empty-cart' : 'hidden'} href='javascript:void(0)' onClick={() => emptyCart()}>Empty Cart</a>
             </div>
           </div>
           <div className='checkout-section'>
