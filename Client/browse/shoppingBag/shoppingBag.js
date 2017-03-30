@@ -64,6 +64,7 @@ class ShoppingBag extends Component {
           <div className='checkout-section'>
             {/** <Link to='/' className='btn btn-primary btn-md'>Proceed to Checkout: {`$${((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2)))).toFixed(2)}`}</Link> **/}
             <button type='button' className={this.props.routing.locationBeforeTransitions.pathname.substring(0, 12) === '/restaurants' ? 'btn btn-primary btn-md checkout-btn' : 'btn btn-primary btn-md checkout-btn-hidden'} onClick={() => this.props.redirectToCheckout()}>Proceed to Checkout: {`$${((Number(bag.subTotal.toFixed(2))) + (Number((bag.subTotal * (1 / 10)).toFixed(2)))).toFixed(2)}`}</button>
+            <button type='button' className={this.props.routing.locationBeforeTransitions.pathname.substring(0, 9) === '/checkout' ? 'btn btn-primary btn-md checkout-btn' : 'btn btn-primary btn-md checkout-btn-hidden'} onClick={() => this.props.redirectToActiveMenu(this.props.bag.currentRestaurant.id)}>Edit Order</button>
           </div>
         </div>
       )
@@ -79,11 +80,13 @@ function mapDispatchToProps (dispatch) {
   return {
     redirectHome: () => dispatch(push('/')),
     emptyCart: () => dispatch(emptyCart()),
-    redirectToCheckout: () => dispatch(push('/checkout'))
+    redirectToCheckout: () => dispatch(push('/checkout')),
+    redirectToActiveMenu: (id) => dispatch(push(`/restaurants/${id}/menu`))
   }
 }
 
 ShoppingBag.propTypes = {
+  redirectToActiveMenu: func,
   redirectHome: func,
   shoppingCart: array,
   subTotal: number,
