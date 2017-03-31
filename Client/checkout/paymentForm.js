@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { reduxForm, Field } from 'redux-form'
-import { adjustTip, adjustCustomTip } from './checkoutActions'
+import { adjustTip, adjustCustomTip, clearCheckout } from './checkoutActions'
+import { emptyCart } from '../browse/shoppingBag/shoppingBagActions'
 import { sendEmail } from '../email/email'
 
 const { func, object } = React.PropTypes
@@ -56,6 +57,9 @@ class PaymentForm extends Component {
         }
       }
     }
+    this.props.clearCheckout()
+    this.props.emptyCart()
+    this.props.redirectToConfirmation()
   }
 
   customTipChange (event) {
@@ -255,7 +259,11 @@ class PaymentForm extends Component {
     }
   }
 }
+
 PaymentForm.propTypes = {
+  clearCheckout: func,
+  emptyCart: func,
+  redirectToConfirmation: func,
   redirectToCheckout: func,
   checkout: object,
   bag: object,
@@ -266,9 +274,12 @@ PaymentForm.propTypes = {
 
 function mapDispatchToProps (dispatch) {
   return {
+    emptyCart: () => dispatch(emptyCart()),
+    clearCheckout: () => dispatch(clearCheckout()),
     redirectToCheckout: () => dispatch(push('/checkout')),
     adjustTip: (total, tax, tip) => dispatch(adjustTip(total, tax, tip)),
-    adjustCustomTip: (tipAmount) => dispatch(adjustCustomTip(tipAmount))
+    adjustCustomTip: (tipAmount) => dispatch(adjustCustomTip(tipAmount)),
+    redirectToConfirmation: () => dispatch(push('/confirmation'))
   }
 }
 
