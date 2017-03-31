@@ -1,4 +1,4 @@
-import { SUBMIT_DELIVERY_FORM, ADJUST_TIP, CUSTOM_TIP_ADJUSTMENT } from './checkoutActions'
+import { SUBMIT_DELIVERY_FORM, ADJUST_TIP, CUSTOM_TIP_ADJUSTMENT, CLEAR_CHECKOUT } from './checkoutActions'
 
 const initialState = {
   deliveryForm: null,
@@ -8,6 +8,8 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case CLEAR_CHECKOUT:
+      return initialState
     case SUBMIT_DELIVERY_FORM:
       return { ...state, deliveryForm: action.payload }
     case ADJUST_TIP:
