@@ -6,11 +6,11 @@ const convertDateTime = (date) => {
     if (hour > 12) {
       hour = hour - 12
     }
-    return Number(time.substring(0,2)) < 12 ? `${hour}${time.substring(2,5)} AM` : `${hour}${time.substring(2,5)} PM`
+    return Number(time.substring(0, 2)) < 12 ? `${hour}${time.substring(2, 5)} AM` : `${hour}${time.substring(2, 5)} PM`
   }
   return {
-    time: convertTime(date.substring(16,21)),
-    date: `${date.substring(4,10)}, ${date.substring(11,16)}`
+    time: convertTime(date.substring(16, 21)),
+    date: `${date.substring(4, 10)}, ${date.substring(11, 16)}`
   }
 }
 
@@ -27,7 +27,6 @@ const emailCreator = (customerInfo, bag, tipAmount) => {
   let costDetails = costBreakdown(bag.subTotal, 10, tipAmount)
 
   return `<html lang="en"><head><meta charset="UTF-8"><title>Document</title><style>body {padding: 10px 25px;}span {font-weight: bold;}.delivery-info div {margin-bottom: 15px;}.customer-info {margin-bottom: 20px;}.customer-info p, .restaurant-info p {margin: 0;margin-bottom: 5px;padding: 0;}</style></head><body><div>${header}<div class="delivery-info">${customerDetails}${restaurantDetails}</div><h3>ORDER DETAILS</h3><table>${itemDetails}${costDetails}</table></div><div><p>Credit card info is not shown, due to this site being used for demo purposes</p></div></body></html>`
-  
 }
 
 const itemBreakdown = (itemsInBag) => {
@@ -36,7 +35,6 @@ const itemBreakdown = (itemsInBag) => {
   const tableRow = (quantity, item, price) => {
     return `<tr><td align="right">${quantity}</td><td align="left">${item}</td><td align="right">$${price}</td></tr>`
   }
-  
   for (let i = 0; i < itemsInBag.length; i++) {
     let item = itemsInBag[i]
     tableRows = tableRows + tableRow(item.quantity, item.item, item.price)
@@ -82,12 +80,16 @@ const restaurantInfoCreator = (restaurantInfoObject) => {
   return `<div class="restaurant-info"><p><span>Delivery From: </span>${name}</p><p><span>${phoneNumber}</span></p><p>${streetAddress}</p><p>${city}, ${state} ${zipcode}</p></div>`
 }
 
+const confirmOrder = (email) => {
+  confirmOrder
+}
+
 export function sendEmail (customerInfo, bag, tipAmount) {
-  // emailjs.send('chouming3@gmail.com', 'chinesegrub', {
-  //   'name': `${customerInfo.firstName} ${customerInfo.lastName}`,
-  //   'email': customerInfo.email,
-  //   'restaurant': bag.currentRestaurant.name,
-  //   'details': emailCreator(customerInfo, bag, tipAmount)
-  // })
-  alert('email sent!!!')
+  emailjs.send('chouming3@gmail.com', 'chinesegrub', {
+    'name': `${customerInfo.firstName} ${customerInfo.lastName}`,
+    'email': customerInfo.email,
+    'restaurant': bag.currentRestaurant.name,
+    'details': emailCreator(customerInfo, bag, tipAmount)
+  })
+  // alert('email sent!!!')
 }
