@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ShoppingItem from './ShoppingItem'
+import ShoppingItem from './shoppingItem'
 import { emptyCart } from './shoppingBagActions'
 // import { Link } from 'react-router'
 import { push } from 'react-router-redux'
