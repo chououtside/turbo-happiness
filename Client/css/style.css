@@ -442,3 +442,13 @@ a, .menu-item {
 h2.redirect-checkout-padding {
 	padding: 10px 10px 30px;
 }
+
+.validate {
+	border-color: #ff9715;
+	border: 2px solid #ff9715;
+	border-radius: 4px;
+}
+
+.validate-color {
+	color: #ff9715;
+}
