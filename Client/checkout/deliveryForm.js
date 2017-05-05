@@ -6,6 +6,21 @@ import { submitDeliveryInfo } from './checkoutActions'
 
 const { func } = React.PropTypes
 
+//redux form validation rules
+const required = value => value ? undefined : 'Required'
+const email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
+  'Invalid email address' : undefined
+
+const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
+  <div>
+    <div>
+      <input {...input} className={touched && error ? 'form-control validate' : 'form-control'} placeholder={label} type={type} />
+      {touched && ((error && <span className='validate-color'>{error}</span>) || (warning && <span className='validate-color'>{warning}</span>))}
+    </div>
+  </div>
+)
+
 class DeliveryForm extends Component {
   onSubmit (values) {
     this.props.submitDeliveryInfo(values)
@@ -20,28 +35,28 @@ class DeliveryForm extends Component {
         <h4 className='delivery-form-sub-header'>Contact</h4>
         <div className='row'>
           <div className='col-md-6 form-group'>
-            <Field name='firstName' component='input' type='text' className='form-control' placeholder='First Name' />
+            <Field name='firstName' type='text' component={renderField} validate={[required]} className='form-control' label={'First Name (Required)'} />
           </div>
         </div>
         <div className='row'>
           <div className='col-md-6 form-group'>
-            <Field name='lastName' component='input' type='text' className='form-control' placeholder='Last Name' />
+            <Field name='lastName' type='text' component={renderField} validate={[required]} className='form-control' label={'Last Name (Required)'} />
           </div>
         </div>
         <div className='row'>
           <div className='col-md-6 form-group'>
-            <Field name='email' component='input' type='text' className='form-control' placeholder='Email Address' />
+            <Field name='email' type='text' className='form-control' component={renderField} validate={[required, email]} label={'Email Address (Required)'} />
           </div>
         </div>
         <div className='row'>
           <div className='col-md-6 form-group'>
-            <Field name='phoneNumber' component='input' type='text' className='form-control' placeholder='Mobile Phone (Required)' />
+            <Field name='phoneNumber' type='text' component={renderField} validate={[required]} className='form-control' label={'Mobile Phone (Required)'} />
           </div>
         </div>
         <h4 className='delivery-form-sub-header'>Address</h4>
         <div className='row'>
           <div className='col-md-4 form-group'>
-            <Field name='address1' component='input' type='text' className='form-control' placeholder='Address (Required)' />
+            <Field name='address1' type='text' component={renderField} validate={[required]} className='form-control' label={'Address (Required)'} />
           </div>
           <div className='col-md-4 form-group'>
             <Field name='address2' component='input' type='text' className='form-control' placeholder='Apt., suite, floor, etc.' />
@@ -52,13 +67,13 @@ class DeliveryForm extends Component {
         </div>
         <div className='row'>
           <div className='col-md-4 form-group'>
-            <Field name='city' component='input' type='text' className='form-control' placeholder='City (Required)' />
+            <Field name='city' type='text' component={renderField} validate={[required]} className='form-control' label={'City (Required)'} />
           </div>
           <div className='col-md-4 form-group'>
-            <Field name='state' component='input' type='text' className='form-control' placeholder='State (Required)' />
+            <Field name='state' type='text' component={renderField} validate={[required]} className='form-control' label={'State (Required)'} />
           </div>
           <div className='col-md-4 form-group'>
-            <Field name='zipcode' component='input' type='text' className='form-control' placeholder='Zip Code (Required)' />
+            <Field name='zipcode' type='text' component={renderField} validate={[required]} className='form-control' label={'Zip Code(Required)'} />
           </div>
         </div>
         <div className='row'>
